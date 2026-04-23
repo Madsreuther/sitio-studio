@@ -15,6 +15,7 @@ import {
   type WorkVariant,
 } from '@/components/placeholders/SelectedWorkThumbnail';
 import { FoundersIllustration } from '@/components/placeholders/FoundersIllustration';
+import { HeroBackdrop } from '@/components/HeroBackdrop';
 
 // Small curated sample list. Images intentionally not wired to live previews
 // yet — placeholder gradients keep the page fast and predictable until real
@@ -61,7 +62,8 @@ export default function HomePage() {
   return (
     <>
       {/* HERO ──────────────────────────────────────────────────────── */}
-      <section className="pt-20 md:pt-32 pb-24 md:pb-32">
+      <section className="relative isolate pt-20 md:pt-32 pb-24 md:pb-32 overflow-hidden">
+        <HeroBackdrop />
         <Container>
           <Reveal>
             <Eyebrow>Copenhagen · est. 2024</Eyebrow>

@@ -64,3 +64,102 @@ body {
     transform: none;
   }
 }
+
+/* ─── Hero backdrop ──────────────────────────────────────────────
+   Four overlapping radial gradients in the cream/earth/ink palette.
+   Each blob is a <div> sized in vmax so it scales with the viewport
+   and still reads as an editorial wash on a 4K monitor.
+   Slow ~28s float, parked by prefers-reduced-motion below. */
+
+.sitio-hero-blob {
+  border-radius: 50%;
+  filter: blur(40px);
+  will-change: transform;
+  animation: sitio-hero-float 28s ease-in-out infinite alternate;
+}
+
+.sitio-hero-blob--a {
+  top: -28%;
+  left: -18%;
+  width: 78vmax;
+  height: 78vmax;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 232, 197, 0.85) 0%,
+    rgba(245, 216, 170, 0.6) 30%,
+    rgba(245, 241, 235, 0) 65%
+  );
+  animation-duration: 32s;
+}
+
+.sitio-hero-blob--b {
+  top: -14%;
+  right: -14%;
+  width: 52vmax;
+  height: 52vmax;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(165, 124, 82, 0.5) 0%,
+    rgba(165, 124, 82, 0.28) 35%,
+    rgba(245, 241, 235, 0) 65%
+  );
+  animation-delay: -9s;
+  animation-duration: 24s;
+}
+
+.sitio-hero-blob--c {
+  bottom: -24%;
+  left: -8%;
+  width: 60vmax;
+  height: 60vmax;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(124, 138, 110, 0.22) 0%,
+    rgba(124, 138, 110, 0.1) 35%,
+    rgba(245, 241, 235, 0) 65%
+  );
+  animation-delay: -14s;
+  animation-duration: 36s;
+}
+
+.sitio-hero-blob--d {
+  bottom: -30%;
+  right: -18%;
+  width: 66vmax;
+  height: 66vmax;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(26, 24, 20, 0.18) 0%,
+    rgba(26, 24, 20, 0.08) 30%,
+    rgba(245, 241, 235, 0) 60%
+  );
+  animation-delay: -5s;
+  animation-duration: 40s;
+}
+
+@keyframes sitio-hero-float {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(3%, -2%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(-2%, 1%, 0) scale(0.98);
+  }
+}
+
+/* Paper grain — tiny inline SVG fractalNoise at 5% opacity kills banding
+   on cheap panels without visibly changing the composition. */
+.sitio-hero-grain {
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 160px 160px;
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sitio-hero-blob {
+    animation: none;
+  }
+}

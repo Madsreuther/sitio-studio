@@ -207,7 +207,7 @@ export default function HomePage() {
               </Reveal>
               <Reveal delayMs={220}>
                 <Prose className="mt-7 max-w-[56ch]">
-                  sitio studio is Mads Reuther and Jon Lykke — two Copenhagen
+                  sitio studio is Mads Reuther and Jon Lollike — two Copenhagen
                   designers with more than twenty years of combined experience
                   building digital work for brands large and small. We started
                   sitio because local businesses deserve sites that feel made
@@ -330,7 +330,7 @@ function FoundersPortrait() {
       <div className="h-full w-full flex items-end p-6">
         <div>
           <p className="font-[var(--font-serif)] text-[22px] text-[var(--color-ink)]">
-            Mads Reuther &<br />Jon Lykke
+            Mads Reuther &<br />Jon Lollike
           </p>
           <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">
             Founders · Copenhagen

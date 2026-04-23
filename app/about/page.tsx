@@ -50,7 +50,7 @@ export default function AboutPage() {
               </Reveal>
               <Reveal delayMs={140}>
                 <Prose>
-                  Mads Reuther and Jon Lykke have spent the last two decades
+                  Mads Reuther and Jon Lollike have spent the last two decades
                   designing digital work for brands across Europe —
                   everything from small family ateliers to national retailers,
                   from Copenhagen&apos;s largest publishers to little winemakers

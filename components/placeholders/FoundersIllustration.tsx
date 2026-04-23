@@ -36,43 +36,34 @@ export function FoundersIllustration() {
       />
       <line x1="32" y1="500" x2="448" y2="500" stroke="#A57C52" strokeOpacity="0.4" />
 
-      {/* monogram — large italic, off-center for editorial feel */}
-      <g fill="#1A1814">
-        <text
-          x="72" y="280"
-          fontFamily="Fraunces, 'GT Super', 'Playfair Display', Georgia, serif"
-          fontSize="180"
-          fontStyle="italic"
-          letterSpacing="-0.03em"
-          opacity="0.92"
-        >
+      {/* monogram — M + J in Fraunces italic, earth accent on the plus.
+          Centered-ish composition, slightly off-axis for editorial weight. */}
+      <g
+        fontFamily="Fraunces, 'GT Super', 'Playfair Display', Georgia, serif"
+        fontStyle="italic"
+        letterSpacing="-0.03em"
+      >
+        <text x="112" y="332" fill="#A57C52" fontSize="220" opacity="0.94">
           M
         </text>
         <text
-          x="230" y="280"
-          fontFamily="Fraunces, 'GT Super', 'Playfair Display', Georgia, serif"
-          fontSize="180"
-          fontStyle="italic"
+          x="244" y="300"
           fill="#A57C52"
-          letterSpacing="-0.03em"
-          opacity="0.88"
+          fontSize="88"
+          fontStyle="normal"
+          fontFamily="Fraunces, 'GT Super', Georgia, serif"
+          letterSpacing="0"
+          opacity="0.9"
         >
-          &amp;
+          +
         </text>
-        <text
-          x="312" y="280"
-          fontFamily="Fraunces, 'GT Super', 'Playfair Display', Georgia, serif"
-          fontSize="180"
-          fontStyle="italic"
-          letterSpacing="-0.03em"
-          opacity="0.92"
-        >
+        <text x="308" y="332" fill="#A57C52" fontSize="220" opacity="0.94">
           J
         </text>
       </g>
 
       {/* descender */}
-      <line x1="72" y1="320" x2="120" y2="320" stroke="#A57C52" strokeWidth="2" />
+      <line x1="112" y1="368" x2="168" y2="368" stroke="#A57C52" strokeWidth="2" />
 
       {/* foot labels */}
       <g fill="#3C3830">

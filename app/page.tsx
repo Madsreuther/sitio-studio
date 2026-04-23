@@ -11,51 +11,29 @@ import {
   Rule,
 } from '@/components/ui';
 import {
-  SelectedWorkIllustration,
+  SelectedWorkThumbnail,
   type WorkVariant,
-} from '@/components/placeholders/SelectedWorkCard';
+} from '@/components/placeholders/SelectedWorkThumbnail';
 import { FoundersIllustration } from '@/components/placeholders/FoundersIllustration';
 
 // Small curated sample list. Images intentionally not wired to live previews
 // yet — placeholder gradients keep the page fast and predictable until real
 // photography lands.
 type Sample = {
-  name: string;
-  location: string;
-  tag: string;
+  kind: string;
+  region: string;
   variant: WorkVariant;
-  href: string;
 };
 
+// Non-clickable display cards — stock-style imagery showing aesthetic
+// across common business types we design for. Intentionally no business
+// names and no click-through; the label below each card is the only
+// context.
 const SAMPLES: Sample[] = [
-  {
-    name: 'Santana Golf',
-    location: 'Mijas, Spain',
-    tag: 'Leisure',
-    variant: 'leisure',
-    href: 'https://santana-golf.vercel.app',
-  },
-  {
-    name: 'Clínica Smile',
-    location: 'Madrid, Spain',
-    tag: 'Health',
-    variant: 'health',
-    href: '#',
-  },
-  {
-    name: 'Pastisseria Font',
-    location: 'Barcelona, Spain',
-    tag: 'Hospitality',
-    variant: 'hospitality',
-    href: '#',
-  },
-  {
-    name: 'Mendoza Wines',
-    location: 'Mendoza, Argentina',
-    tag: 'Wine & spirits',
-    variant: 'wine',
-    href: '#',
-  },
+  { kind: 'Boutique hotel', region: 'Costa del Sol', variant: 'hospitality' },
+  { kind: 'Restaurant', region: 'Lisboa', variant: 'leisure' },
+  { kind: 'Dental clinic', region: 'Madrid', variant: 'health' },
+  { kind: 'Winery', region: 'Mendoza', variant: 'wine' },
 ];
 
 const PILLARS = [
@@ -192,14 +170,8 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-7">
             {SAMPLES.map((s, i) => (
-              <Reveal key={s.name} delayMs={i * 80}>
-                <SampleCard
-                  name={s.name}
-                  location={s.location}
-                  tag={s.tag}
-                  variant={s.variant}
-                  href={s.href}
-                />
+              <Reveal key={`${s.kind}-${s.region}`} delayMs={i * 80}>
+                <SampleCard kind={s.kind} region={s.region} variant={s.variant} />
               </Reveal>
             ))}
           </div>
@@ -280,37 +252,29 @@ export default function HomePage() {
 
 // ─────────────────────────────────────────────────────────────────
 
-function SampleCard({ name, location, tag, variant, href }: Sample) {
-  const isLive = href && href !== '#';
-  const Wrapper = ({ children }: { children: React.ReactNode }) =>
-    isLive ? (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group block"
-      >
-        {children}
-      </a>
-    ) : (
-      <div className="group block">{children}</div>
-    );
+function SampleCard({
+  kind,
+  region,
+  variant,
+}: {
+  kind: string;
+  region: string;
+  variant: WorkVariant;
+}) {
   return (
-    <Wrapper>
-      <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-[var(--color-cream-deep)]">
-        <SelectedWorkIllustration
-          variant={variant}
-          businessName={name}
-          region={location}
-          tag={tag}
-        />
-        {isLive ? (
-          <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 h-7 px-3 rounded-full bg-[var(--color-ink)]/85 text-[var(--color-cream)] text-[11px] uppercase tracking-[0.18em] font-medium backdrop-blur">
-            Live →
-          </span>
-        ) : null}
+    <figure className="block">
+      <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-[var(--color-cream-deep)] ring-1 ring-[var(--color-rule)]/70">
+        <SelectedWorkThumbnail variant={variant} />
       </div>
-    </Wrapper>
+      <figcaption className="mt-4 flex items-baseline justify-between gap-4 text-[14px]">
+        <span className="font-[var(--font-serif)] italic text-[17px] text-[var(--color-ink)]">
+          {kind}
+        </span>
+        <span className="uppercase tracking-[0.2em] text-[11px] text-[var(--color-ink-muted)]">
+          {region}
+        </span>
+      </figcaption>
+    </figure>
   );
 }
 

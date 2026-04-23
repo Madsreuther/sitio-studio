@@ -1,0 +1,47 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "hello-sitio.com" }],
+      "destination": "https://sitiostudio.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.hello-sitio.com" }],
+      "destination": "https://sitiostudio.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "sitio-hq.com" }],
+      "destination": "https://sitiostudio.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.sitio-hq.com" }],
+      "destination": "https://sitiostudio.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "sitiodesign.app" }],
+      "destination": "https://sitiostudio.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.sitiodesign.app" }],
+      "destination": "https://sitiostudio.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.sitiostudio.com" }],
+      "destination": "https://sitiostudio.com/$1",
+      "permanent": true
+    }
+  ]
+}

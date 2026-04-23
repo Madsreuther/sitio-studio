@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# sitio studio
 
-## Getting Started
+Marketing site for sitiostudio.com — a boutique website studio in Copenhagen.
 
-First, run the development server:
+Next.js 16 · TypeScript · Tailwind · Resend contact form.
+
+## Local dev
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev            # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Required for | Notes |
+|----------|--------------|-------|
+| `RESEND_API_KEY` | contact form | When unset the form logs the message and returns success so local dev still works |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Pages
 
-## Learn More
+```
+/              Home
+/about         About — founders + why
+/process       How a project runs + FAQ
+/pricing       €1000 + €29/month breakdown
+/contact       Contact form (Resend)
+/api/contact   Form POST endpoint
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+No CMS. Copy lives directly in the page components in `app/*/page.tsx`.
+Sample-work cards are an array at the top of `app/page.tsx`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Design system
 
-## Deploy on Vercel
+- Fonts: Fraunces (serif headings), Inter (body) — both via `next/font/google`.
+- Palette: cream `#F5F1EB` · earth `#A57C52` · ink `#1A1814` — CSS vars in `app/globals.css`.
+- Motion: opt-in fade-up on scroll via `components/Reveal.tsx`; respects `prefers-reduced-motion`.
+- Components: `SiteHeader`, `SiteFooter`, `Container`, primitives in `ui.tsx`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Redirects
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Alternate domains (`hello-sitio.com`, `sitio-hq.com`, `sitiodesign.app`) permanent-redirect to `sitiostudio.com` via `vercel.json`.
+
+## Deployment
+
+GitHub push → Vercel auto-deploy. OG image auto-generates at `/opengraph-image`. `robots.ts` + `sitemap.ts` are MetadataRoute files so Next serves `/robots.txt` and `/sitemap.xml` automatically.

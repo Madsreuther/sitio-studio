@@ -170,7 +170,7 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-7">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-5 lg:gap-6">
             {SAMPLES.map((s, i) => (
               <Reveal key={`${s.kind}-${s.region}`} delayMs={i * 80}>
                 <SampleCard kind={s.kind} region={s.region} variant={s.variant} />
@@ -226,7 +226,7 @@ export default function HomePage() {
             </Eyebrow>
           </Reveal>
           <Reveal delayMs={80}>
-            <h2 className="mt-5 font-[var(--font-serif)] text-[34px] md:text-[50px] leading-[1.08] tracking-[-0.01em]">
+            <h2 className="mt-5 font-[var(--font-serif)] text-[30px] sm:text-[36px] md:text-[50px] leading-[1.08] tracking-[-0.01em]">
               Tell us about your business. We&apos;ll reply within 24 hours.
             </h2>
           </Reveal>
@@ -268,11 +268,11 @@ function SampleCard({
       <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-[var(--color-cream-deep)] ring-1 ring-[var(--color-rule)]/70">
         <SelectedWorkThumbnail variant={variant} />
       </div>
-      <figcaption className="mt-4 flex items-baseline justify-between gap-4 text-[14px]">
-        <span className="font-[var(--font-serif)] italic text-[17px] text-[var(--color-ink)]">
+      <figcaption className="mt-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <span className="font-[var(--font-serif)] italic text-[16px] lg:text-[15px] text-[var(--color-ink)]">
           {kind}
         </span>
-        <span className="uppercase tracking-[0.2em] text-[11px] text-[var(--color-ink-muted)]">
+        <span className="uppercase tracking-[0.2em] text-[10.5px] text-[var(--color-ink-muted)]">
           {region}
         </span>
       </figcaption>
@@ -282,7 +282,7 @@ function SampleCard({
 
 function FoundersPortrait() {
   return (
-    <div className="aspect-[4/5] rounded-md overflow-hidden bg-[var(--color-cream-deep)]">
+    <div className="max-w-[280px] mx-auto md:mx-0 md:max-w-none aspect-[4/5] rounded-md overflow-hidden bg-[var(--color-cream-deep)]">
       <FoundersIllustration />
     </div>
   );

@@ -65,12 +65,19 @@ export function ContactForm() {
         />
       </div>
       <div className="grid sm:grid-cols-2 gap-5">
-        <Field label="Business name" name="business" required />
+        <Field
+          label="Business name"
+          name="business"
+          required
+          autoComplete="organization"
+        />
         <Field
           label="Current website (optional)"
           name="website"
           placeholder="https://"
           type="url"
+          autoComplete="url"
+          inputMode="url"
         />
       </div>
       <FieldTextarea
@@ -125,6 +132,7 @@ function Field({
   required = false,
   placeholder,
   autoComplete,
+  inputMode,
 }: {
   label: string;
   name: string;
@@ -132,6 +140,7 @@ function Field({
   required?: boolean;
   placeholder?: string;
   autoComplete?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
 }) {
   return (
     <label className="block">
@@ -145,7 +154,8 @@ function Field({
         required={required}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className="w-full h-12 px-4 bg-[var(--color-cream-deep)]/70 border border-[var(--color-rule)] rounded-md text-[15px] text-[var(--color-ink)] placeholder:text-[var(--color-ink-muted)]/60 focus:border-[var(--color-ink)] focus:bg-[var(--color-cream)] focus:outline-none focus:ring-2 focus:ring-[var(--color-ink)]/10 transition-colors"
+        inputMode={inputMode}
+        className="w-full h-12 px-4 bg-[var(--color-cream-deep)]/70 border border-[var(--color-rule)] rounded-md text-[16px] text-[var(--color-ink)] placeholder:text-[var(--color-ink-muted)]/60 focus:border-[var(--color-ink)] focus:bg-[var(--color-cream)] focus:outline-none focus:ring-2 focus:ring-[var(--color-ink)]/10 transition-colors"
       />
     </label>
   );
@@ -175,7 +185,7 @@ function FieldTextarea({
         rows={rows}
         required={required}
         placeholder={placeholder}
-        className="w-full px-4 py-3 bg-[var(--color-cream-deep)]/70 border border-[var(--color-rule)] rounded-md text-[15px] leading-[1.65] text-[var(--color-ink)] placeholder:text-[var(--color-ink-muted)]/60 focus:border-[var(--color-ink)] focus:bg-[var(--color-cream)] focus:outline-none focus:ring-2 focus:ring-[var(--color-ink)]/10 transition-colors resize-y"
+        className="w-full px-4 py-3 bg-[var(--color-cream-deep)]/70 border border-[var(--color-rule)] rounded-md text-[16px] leading-[1.65] text-[var(--color-ink)] placeholder:text-[var(--color-ink-muted)]/60 focus:border-[var(--color-ink)] focus:bg-[var(--color-cream)] focus:outline-none focus:ring-2 focus:ring-[var(--color-ink)]/10 transition-colors resize-y"
       />
     </label>
   );

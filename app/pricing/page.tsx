@@ -201,7 +201,7 @@ function PriceCard({
         {label}
       </span>
       <div className="mt-6 flex items-baseline gap-2">
-        <span className="font-[var(--font-serif)] text-[56px] md:text-[72px] leading-none tracking-[-0.02em]">
+        <span className="font-[var(--font-serif)] text-[48px] sm:text-[56px] md:text-[72px] leading-none tracking-[-0.02em]">
           {amount}
         </span>
         {frequency ? (

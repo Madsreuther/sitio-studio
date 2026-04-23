@@ -25,10 +25,16 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Belt-and-braces guard against horizontal scroll on mobile —
+     the hero backdrop already clips itself, but any future wide
+     element (iframe, wide image, etc.) will still not break the
+     viewport width. */
+  overflow-x: hidden;
 }
 
 body {
   background: var(--color-cream);
+  overflow-x: hidden;
 }
 
 ::selection {

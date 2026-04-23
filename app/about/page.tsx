@@ -37,7 +37,7 @@ export default function AboutPage() {
         <Container>
           <div className="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-20 items-start">
             <Reveal>
-              <div className="aspect-[4/5] rounded-md overflow-hidden bg-[var(--color-cream-deep)]">
+              <div className="max-w-[280px] mx-auto md:mx-0 md:max-w-none aspect-[4/5] rounded-md overflow-hidden bg-[var(--color-cream-deep)]">
                 <FoundersIllustration />
               </div>
             </Reveal>

@@ -10,7 +10,7 @@ export function DisplayHeading({
 }) {
   return (
     <h1
-      className={`font-[var(--font-serif)] text-[44px] md:text-[64px] leading-[1.04] tracking-[-0.015em] text-[var(--color-ink)] ${className}`}
+      className={`font-[var(--font-serif)] text-[40px] sm:text-[52px] md:text-[64px] leading-[1.04] tracking-[-0.015em] text-[var(--color-ink)] ${className}`}
     >
       {children}
     </h1>

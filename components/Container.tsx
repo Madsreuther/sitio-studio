@@ -8,7 +8,7 @@ export function Container({
   className?: string;
 }) {
   return (
-    <div className={`mx-auto max-w-[1120px] px-6 md:px-10 ${className}`}>
+    <div className={`mx-auto max-w-[1120px] px-5 sm:px-6 md:px-10 ${className}`}>
       {children}
     </div>
   );
@@ -22,7 +22,7 @@ export function NarrowContainer({
   className?: string;
 }) {
   return (
-    <div className={`mx-auto max-w-[760px] px-6 md:px-10 ${className}`}>
+    <div className={`mx-auto max-w-[760px] px-5 sm:px-6 md:px-10 ${className}`}>
       {children}
     </div>
   );

@@ -1,65 +1,342 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { Container, NarrowContainer } from '@/components/Container';
+import { Reveal } from '@/components/Reveal';
+import {
+  DisplayHeading,
+  SectionHeading,
+  Eyebrow,
+  Prose,
+  PrimaryButton,
+  SecondaryButton,
+  Rule,
+} from '@/components/ui';
 
-export default function Home() {
+// Small curated sample list. Images intentionally not wired to live previews
+// yet — placeholder gradients keep the page fast and predictable until real
+// photography lands.
+const SAMPLES = [
+  {
+    name: 'Santana Golf',
+    location: 'Mijas, Spain',
+    tag: 'Leisure',
+    hue: 'linear-gradient(135deg, #C8B487 0%, #8C663D 60%, #3E2D1C 100%)',
+    href: 'https://santana-golf.vercel.app',
+  },
+  {
+    name: 'Clínica Smile',
+    location: 'Madrid, Spain',
+    tag: 'Health',
+    hue: 'linear-gradient(135deg, #E8DACA 0%, #B48F6F 55%, #5A4534 100%)',
+    href: '#',
+  },
+  {
+    name: 'Pastisseria Font',
+    location: 'Barcelona, Spain',
+    tag: 'Hospitality',
+    hue: 'linear-gradient(135deg, #F1E4CD 0%, #C49468 50%, #6B4A2E 100%)',
+    href: '#',
+  },
+  {
+    name: 'Mendoza Wines',
+    location: 'Mendoza, Argentina',
+    tag: 'Wine & spirits',
+    hue: 'linear-gradient(135deg, #D9BFA8 0%, #9A5E49 55%, #3F1E18 100%)',
+    href: '#',
+  },
+];
+
+const PILLARS = [
+  {
+    step: '01',
+    title: 'Discover',
+    body:
+      'We study your business — reviews, reputation, photography, competitive context. You tell us what you want more of. We come back with direction, not a template.',
+  },
+  {
+    step: '02',
+    title: 'Design',
+    body:
+      'A site that reads like you, not an agency deck. Bespoke layout, thoughtful typography, copy in your language. Two rounds of refinement included.',
+  },
+  {
+    step: '03',
+    title: 'Deliver',
+    body:
+      'Live on your own domain in seven days. Fast, accessible, self-editable. We support it for the life of your subscription — no lock-in, no surprise invoices.',
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      {/* HERO ──────────────────────────────────────────────────────── */}
+      <section className="pt-20 md:pt-32 pb-24 md:pb-32">
+        <Container>
+          <Reveal>
+            <Eyebrow>Copenhagen · est. 2024</Eyebrow>
+          </Reveal>
+          <Reveal delayMs={60}>
+            <DisplayHeading className="mt-6 max-w-[18ch]">
+              Beautiful websites for ambitious local businesses,
+              <span className="text-[var(--color-earth)]"> delivered in seven days.</span>
+            </DisplayHeading>
+          </Reveal>
+          <Reveal delayMs={140}>
+            <Prose className="mt-8 max-w-[56ch]">
+              We build bespoke sites for the kind of businesses a template
+              can&apos;t do justice — restaurants, vineyards, clinics, golf clubs,
+              shops in small towns with big reputations. One flat price. No
+              lock-in. Made by humans in Copenhagen.
+            </Prose>
+          </Reveal>
+          <Reveal delayMs={220}>
+            <div className="mt-10 flex flex-col sm:flex-row gap-3">
+              <PrimaryButton href="/contact">See your business&apos;s preview →</PrimaryButton>
+              <SecondaryButton href="/process">How it works</SecondaryButton>
+            </div>
+          </Reveal>
+        </Container>
+      </section>
+
+      <Rule />
+
+      {/* WHAT WE DO — 3 pillars ───────────────────────────────────── */}
+      <section className="py-24 md:py-32">
+        <Container>
+          <div className="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-20">
+            <Reveal>
+              <div>
+                <Eyebrow>What we do</Eyebrow>
+                <SectionHeading className="mt-5">
+                  A short, careful process — and a live site at the end.
+                </SectionHeading>
+              </div>
+            </Reveal>
+            <div className="flex flex-col">
+              {PILLARS.map((p, i) => (
+                <Reveal key={p.step} delayMs={i * 90}>
+                  <div className="py-8 md:py-10 first:pt-0 border-b last:border-b-0 border-[var(--color-rule)]/70">
+                    <div className="grid grid-cols-[56px_1fr] md:grid-cols-[72px_1fr] gap-4">
+                      <span className="font-[var(--font-serif)] text-[22px] md:text-[26px] text-[var(--color-earth)] tracking-tight pt-1">
+                        {p.step}
+                      </span>
+                      <div>
+                        <h3 className="font-[var(--font-serif)] text-[24px] md:text-[30px] leading-[1.15] tracking-[-0.01em] text-[var(--color-ink)]">
+                          {p.title}
+                        </h3>
+                        <p className="mt-3 text-[16px] leading-[1.72] text-[var(--color-ink-soft)] max-w-[54ch]">
+                          {p.body}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* WHO WE SERVE ─────────────────────────────────────────────── */}
+      <section className="py-24 md:py-32 bg-[var(--color-cream-deep)]">
+        <NarrowContainer>
+          <Reveal>
+            <Eyebrow>Who we serve</Eyebrow>
+          </Reveal>
+          <Reveal delayMs={80}>
+            <SectionHeading className="mt-5">
+              For businesses built on reputation, not reach.
+            </SectionHeading>
+          </Reveal>
+          <Reveal delayMs={160}>
+            <Prose className="mt-8">
+              Our clients run small, particular businesses — usually in Southern
+              Europe, sometimes further afield. A family restaurant on the
+              Costa del Sol. A dental clinic in Madrid. A boutique hotel above
+              the Douro. A golf club an hour south of Málaga. Places people
+              love, told online the way they deserve to be told.
+            </Prose>
+          </Reveal>
+        </NarrowContainer>
+      </section>
+
+      {/* SELECTED WORK ────────────────────────────────────────────── */}
+      <section className="py-24 md:py-32">
+        <Container>
+          <div className="flex items-end justify-between gap-8 mb-12">
+            <Reveal>
+              <div>
+                <Eyebrow>Selected work</Eyebrow>
+                <SectionHeading className="mt-5">Recent sites.</SectionHeading>
+              </div>
+            </Reveal>
+            <Reveal delayMs={100}>
+              <p className="hidden sm:block text-[13px] text-[var(--color-ink-muted)] max-w-[32ch] leading-relaxed">
+                Sample work · early launches. More case studies being written.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-7">
+            {SAMPLES.map((s, i) => (
+              <Reveal key={s.name} delayMs={i * 80}>
+                <SampleCard {...s} />
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <Rule />
+
+      {/* FROM THE FOUNDERS ────────────────────────────────────────── */}
+      <section className="py-24 md:py-32">
+        <Container>
+          <div className="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-20 items-start">
+            <Reveal>
+              <FoundersPortrait />
+            </Reveal>
+            <div>
+              <Reveal delayMs={80}>
+                <Eyebrow>From the founders</Eyebrow>
+              </Reveal>
+              <Reveal delayMs={140}>
+                <SectionHeading className="mt-5 max-w-[22ch]">
+                  Danish sensibility, 20+ years of pixels between us.
+                </SectionHeading>
+              </Reveal>
+              <Reveal delayMs={220}>
+                <Prose className="mt-7 max-w-[56ch]">
+                  sitio studio is Mads Reuther and Jon Lykke — two Copenhagen
+                  designers with more than twenty years of combined experience
+                  building digital work for brands large and small. We started
+                  sitio because local businesses deserve sites that feel made
+                  for them, not picked from a dropdown.
+                </Prose>
+              </Reveal>
+              <Reveal delayMs={300}>
+                <div className="mt-8">
+                  <SecondaryButton href="/about">Read our story →</SecondaryButton>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* CTA ──────────────────────────────────────────────────────── */}
+      <section className="py-24 md:py-28 bg-[var(--color-ink)] text-[var(--color-cream)]">
+        <NarrowContainer className="text-center">
+          <Reveal>
+            <Eyebrow className="text-[var(--color-earth)]">
+              Start a project
+            </Eyebrow>
+          </Reveal>
+          <Reveal delayMs={80}>
+            <h2 className="mt-5 font-[var(--font-serif)] text-[34px] md:text-[50px] leading-[1.08] tracking-[-0.01em]">
+              Tell us about your business. We&apos;ll reply within 24 hours.
+            </h2>
+          </Reveal>
+          <Reveal delayMs={180}>
+            <div className="mt-10 flex items-center justify-center gap-3">
+              <Link
+                href="/contact"
+                className="inline-flex items-center h-12 px-7 rounded-full bg-[var(--color-cream)] text-[var(--color-ink)] text-[15px] font-medium hover:bg-white transition-colors"
+              >
+                Get in touch
+              </Link>
+              <a
+                href="mailto:hello@sitiostudio.com"
+                className="text-[14px] text-[var(--color-cream)]/80 hover:text-[var(--color-cream)] underline decoration-[var(--color-earth)] underline-offset-4"
+              >
+                hello@sitiostudio.com
+              </a>
+            </div>
+          </Reveal>
+        </NarrowContainer>
+      </section>
+    </>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+
+function SampleCard({
+  name,
+  location,
+  tag,
+  hue,
+  href,
+}: {
+  name: string;
+  location: string;
+  tag: string;
+  hue: string;
+  href: string;
+}) {
+  const Wrapper = ({ children }: { children: React.ReactNode }) =>
+    href && href !== '#' ? (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block"
+      >
+        {children}
+      </a>
+    ) : (
+      <div className="group block">{children}</div>
+    );
+  return (
+    <Wrapper>
+      <div
+        className="relative aspect-[4/3] rounded-md overflow-hidden"
+        style={{ background: hue }}
+      >
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 30% 20%, rgba(255,255,255,0.6) 0%, transparent 55%)',
+          }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+        <div className="absolute inset-0 p-7 flex items-end">
+          <div className="text-[var(--color-cream)]">
+            <p className="font-[var(--font-serif)] text-[24px] md:text-[28px] leading-tight tracking-tight">
+              {name}
+            </p>
+            <p className="mt-1 text-[12px] uppercase tracking-[0.18em] opacity-75">
+              {location}
+            </p>
+          </div>
+        </div>
+        <span className="absolute top-4 right-4 text-[11px] uppercase tracking-[0.18em] text-[var(--color-cream)]/85 font-medium">
+          {tag}
+        </span>
+      </div>
+    </Wrapper>
+  );
+}
+
+function FoundersPortrait() {
+  return (
+    <div
+      className="aspect-[4/5] rounded-md overflow-hidden"
+      style={{
+        background:
+          'linear-gradient(155deg, #EDE6DB 0%, #D9C7AE 50%, #A57C52 100%)',
+      }}
+    >
+      <div className="h-full w-full flex items-end p-6">
+        <div>
+          <p className="font-[var(--font-serif)] text-[22px] text-[var(--color-ink)]">
+            Mads Reuther &<br />Jon Lykke
+          </p>
+          <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">
+            Founders · Copenhagen
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }

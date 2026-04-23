@@ -9,6 +9,7 @@ import {
   PrimaryButton,
   Rule,
 } from '@/components/ui';
+import { FoundersIllustration } from '@/components/placeholders/FoundersIllustration';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -36,13 +37,9 @@ export default function AboutPage() {
         <Container>
           <div className="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-20 items-start">
             <Reveal>
-              <div
-                className="aspect-[4/5] rounded-md overflow-hidden"
-                style={{
-                  background:
-                    'linear-gradient(155deg, #EDE6DB 0%, #C8A37A 55%, #6B4A2E 100%)',
-                }}
-              />
+              <div className="aspect-[4/5] rounded-md overflow-hidden bg-[var(--color-cream-deep)]">
+                <FoundersIllustration />
+              </div>
             </Reveal>
             <div className="flex flex-col gap-8">
               <Reveal delayMs={80}>

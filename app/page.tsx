@@ -10,37 +10,50 @@ import {
   SecondaryButton,
   Rule,
 } from '@/components/ui';
+import {
+  SelectedWorkIllustration,
+  type WorkVariant,
+} from '@/components/placeholders/SelectedWorkCard';
+import { FoundersIllustration } from '@/components/placeholders/FoundersIllustration';
 
 // Small curated sample list. Images intentionally not wired to live previews
 // yet — placeholder gradients keep the page fast and predictable until real
 // photography lands.
-const SAMPLES = [
+type Sample = {
+  name: string;
+  location: string;
+  tag: string;
+  variant: WorkVariant;
+  href: string;
+};
+
+const SAMPLES: Sample[] = [
   {
     name: 'Santana Golf',
     location: 'Mijas, Spain',
     tag: 'Leisure',
-    hue: 'linear-gradient(135deg, #C8B487 0%, #8C663D 60%, #3E2D1C 100%)',
+    variant: 'leisure',
     href: 'https://santana-golf.vercel.app',
   },
   {
     name: 'Clínica Smile',
     location: 'Madrid, Spain',
     tag: 'Health',
-    hue: 'linear-gradient(135deg, #E8DACA 0%, #B48F6F 55%, #5A4534 100%)',
+    variant: 'health',
     href: '#',
   },
   {
     name: 'Pastisseria Font',
     location: 'Barcelona, Spain',
     tag: 'Hospitality',
-    hue: 'linear-gradient(135deg, #F1E4CD 0%, #C49468 50%, #6B4A2E 100%)',
+    variant: 'hospitality',
     href: '#',
   },
   {
     name: 'Mendoza Wines',
     location: 'Mendoza, Argentina',
     tag: 'Wine & spirits',
-    hue: 'linear-gradient(135deg, #D9BFA8 0%, #9A5E49 55%, #3F1E18 100%)',
+    variant: 'wine',
     href: '#',
   },
 ];
@@ -180,7 +193,13 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-7">
             {SAMPLES.map((s, i) => (
               <Reveal key={s.name} delayMs={i * 80}>
-                <SampleCard {...s} />
+                <SampleCard
+                  name={s.name}
+                  location={s.location}
+                  tag={s.tag}
+                  variant={s.variant}
+                  href={s.href}
+                />
               </Reveal>
             ))}
           </div>
@@ -261,21 +280,10 @@ export default function HomePage() {
 
 // ─────────────────────────────────────────────────────────────────
 
-function SampleCard({
-  name,
-  location,
-  tag,
-  hue,
-  href,
-}: {
-  name: string;
-  location: string;
-  tag: string;
-  hue: string;
-  href: string;
-}) {
+function SampleCard({ name, location, tag, variant, href }: Sample) {
+  const isLive = href && href !== '#';
   const Wrapper = ({ children }: { children: React.ReactNode }) =>
-    href && href !== '#' ? (
+    isLive ? (
       <a
         href={href}
         target="_blank"
@@ -289,30 +297,18 @@ function SampleCard({
     );
   return (
     <Wrapper>
-      <div
-        className="relative aspect-[4/3] rounded-md overflow-hidden"
-        style={{ background: hue }}
-      >
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 30% 20%, rgba(255,255,255,0.6) 0%, transparent 55%)',
-          }}
+      <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-[var(--color-cream-deep)]">
+        <SelectedWorkIllustration
+          variant={variant}
+          businessName={name}
+          region={location}
+          tag={tag}
         />
-        <div className="absolute inset-0 p-7 flex items-end">
-          <div className="text-[var(--color-cream)]">
-            <p className="font-[var(--font-serif)] text-[24px] md:text-[28px] leading-tight tracking-tight">
-              {name}
-            </p>
-            <p className="mt-1 text-[12px] uppercase tracking-[0.18em] opacity-75">
-              {location}
-            </p>
-          </div>
-        </div>
-        <span className="absolute top-4 right-4 text-[11px] uppercase tracking-[0.18em] text-[var(--color-cream)]/85 font-medium">
-          {tag}
-        </span>
+        {isLive ? (
+          <span className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 h-7 px-3 rounded-full bg-[var(--color-ink)]/85 text-[var(--color-cream)] text-[11px] uppercase tracking-[0.18em] font-medium backdrop-blur">
+            Live →
+          </span>
+        ) : null}
       </div>
     </Wrapper>
   );
@@ -320,23 +316,8 @@ function SampleCard({
 
 function FoundersPortrait() {
   return (
-    <div
-      className="aspect-[4/5] rounded-md overflow-hidden"
-      style={{
-        background:
-          'linear-gradient(155deg, #EDE6DB 0%, #D9C7AE 50%, #A57C52 100%)',
-      }}
-    >
-      <div className="h-full w-full flex items-end p-6">
-        <div>
-          <p className="font-[var(--font-serif)] text-[22px] text-[var(--color-ink)]">
-            Mads Reuther &<br />Jon Lollike
-          </p>
-          <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">
-            Founders · Copenhagen
-          </p>
-        </div>
-      </div>
+    <div className="aspect-[4/5] rounded-md overflow-hidden bg-[var(--color-cream-deep)]">
+      <FoundersIllustration />
     </div>
   );
 }

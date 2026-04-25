@@ -71,6 +71,45 @@ body {
   }
 }
 
+/* ─── Animated headline letters ──────────────────────────────────
+   Per-letter reveal + variable-weight breathing. Each .sitio-letter
+   starts invisible and animates to opacity 1 with a small upward
+   translate. font-variation-settings transitions the wght axis on
+   hover for a soft "breath". */
+
+@keyframes sitio-letter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.18em);
+    font-variation-settings: 'wght' 240, 'opsz' 36;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    font-variation-settings: 'wght' 420, 'opsz' 36;
+  }
+}
+
+.sitio-letter {
+  opacity: 0;
+  animation: sitio-letter-rise 720ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  font-variation-settings: 'wght' 420, 'opsz' 36;
+  transition: font-variation-settings 280ms ease;
+  will-change: transform, opacity, font-variation-settings;
+}
+
+.sitio-letter:hover {
+  font-variation-settings: 'wght' 580, 'opsz' 36;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sitio-letter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ─── Custom cursor ──────────────────────────────────────────────
    Earth-toned dot trailing the real cursor. The OS cursor is hidden
    site-wide once the custom one is alive, but only on fine pointers

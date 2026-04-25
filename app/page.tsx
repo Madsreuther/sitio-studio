@@ -17,6 +17,7 @@ import {
 import { FoundersIllustration } from '@/components/placeholders/FoundersIllustration';
 import { HeroScene3D } from '@/components/HeroScene';
 import { HeroAiWash } from '@/components/HeroAiWash';
+import { AnimatedHeadline } from '@/components/AnimatedHeadline';
 import { readHeroManifest, readWorkManifest } from '@/lib/ai/manifest';
 
 // Small curated sample list. Images intentionally not wired to live previews
@@ -90,8 +91,10 @@ export default function HomePage() {
           </Reveal>
           <Reveal delayMs={60}>
             <DisplayHeading className="mt-6 max-w-[18ch]">
-              Beautiful websites for ambitious local businesses,
-              <span className="text-[var(--color-earth)]"> delivered in seven days.</span>
+              <AnimatedHeadline>
+                Beautiful websites for ambitious local businesses,
+                <span className="text-[var(--color-earth)]"> delivered in seven days.</span>
+              </AnimatedHeadline>
             </DisplayHeading>
           </Reveal>
           <Reveal delayMs={140}>

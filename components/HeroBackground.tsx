@@ -54,29 +54,36 @@ export function HeroBackground({ manifest }: { manifest: HeroManifest | null }) 
               onLoad={() => setLoaded(true)}
               onError={() => setErrored(true)}
               className="object-cover"
+              // De-saturate slightly + drop brightness 4% so even the
+              // lightest images (paper-light, terraced-hills) don't
+              // wash out the cream overlay above them.
+              style={{ filter: 'saturate(0.88) brightness(0.96)' }}
             />
           </div>
 
-          {/* Warm cream wash for legibility. Sits above the image but
-              under the type stack. Spec: rgba(255,232,197,0.4) — kept
-              exact so the design intent is reproducible. */}
+          {/* Single diagonal cream wash: heaviest at upper-left where
+              the headline lives (0.65), thin at lower-right (0.2).
+              Replaces the previous two-layer flat-plus-radial stack —
+              one gradient is easier to reason about and reads
+              consistently across all 5 source images. */}
           <div
             className="absolute inset-0"
             style={{
-              background: 'rgba(255, 232, 197, 0.4)',
+              background:
+                'linear-gradient(125deg, rgba(245,241,235,0.65) 0%, rgba(245,241,235,0.42) 45%, rgba(245,241,235,0.2) 100%)',
               opacity: loaded ? 1 : 0,
               transition: 'opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1)',
             }}
           />
 
-          {/* Extra cream feather toward the upper-left so the headline
-              region tilts a touch lighter than the rest of the image,
-              regardless of which scene was randomly selected. */}
+          {/* Soft edge bloom — a faint upper-left lift that adds the
+              "afternoon light" feel without changing the contrast
+              curve under the type. */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                'radial-gradient(ellipse 70% 70% at 22% 30%, rgba(245,241,235,0.55) 0%, rgba(245,241,235,0) 65%)',
+                'radial-gradient(ellipse 60% 55% at 18% 22%, rgba(255,240,210,0.18) 0%, rgba(255,240,210,0) 70%)',
               opacity: loaded ? 1 : 0,
               transition: 'opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1)',
             }}

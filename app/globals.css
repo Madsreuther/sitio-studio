@@ -120,25 +120,29 @@ body {
   from {
     opacity: 0;
     transform: translateY(0.18em);
-    font-variation-settings: 'wght' 240, 'opsz' 36;
+    font-variation-settings: 'wght' 360, 'opsz' 36;
   }
   to {
     opacity: 1;
     transform: translateY(0);
-    font-variation-settings: 'wght' 420, 'opsz' 36;
+    font-variation-settings: 'wght' 540, 'opsz' 36;
   }
 }
 
 .sitio-letter {
   opacity: 0;
   animation: sitio-letter-rise 720ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
-  font-variation-settings: 'wght' 420, 'opsz' 36;
+  font-variation-settings: 'wght' 540, 'opsz' 36;
   transition: font-variation-settings 280ms ease;
   will-change: transform, opacity, font-variation-settings;
+  /* Faint shadow lifts the headline off any AI background that lands
+     darker than expected. Subtle by design — invisible over the cream
+     wash, just present enough to bind type to ground. */
+  text-shadow: 0 1px 12px rgba(26, 24, 20, 0.15);
 }
 
 .sitio-letter:hover {
-  font-variation-settings: 'wght' 580, 'opsz' 36;
+  font-variation-settings: 'wght' 660, 'opsz' 36;
 }
 
 @media (prefers-reduced-motion: reduce) {

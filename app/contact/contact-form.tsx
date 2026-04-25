@@ -99,9 +99,19 @@ export function ContactForm() {
       />
 
       {error ? (
-        <p className="text-[14px] text-red-700 bg-red-50 border border-red-200 rounded-md px-4 py-3">
-          Something went wrong: {error}. Email us directly at{' '}
-          <a className="underline" href="mailto:hello@sitiostudio.com">
+        <p
+          role="alert"
+          className="text-[14px] leading-[1.6] text-[var(--color-ink)] bg-[var(--color-cream-deep)] border border-[var(--color-earth)]/50 rounded-md px-4 py-3"
+        >
+          <span className="font-[var(--font-serif)] italic text-[var(--color-earth-dark)]">
+            Something went wrong.
+          </span>{' '}
+          {error}. Email us directly at{' '}
+          <a
+            className="underline decoration-[var(--color-earth)] decoration-1 underline-offset-[5px] hover:text-[var(--color-earth)] transition-colors duration-300"
+            style={{ transitionTimingFunction: 'var(--sitio-ease)' }}
+            href="mailto:hello@sitiostudio.com"
+          >
             hello@sitiostudio.com
           </a>{' '}
           and we&apos;ll pick it up.

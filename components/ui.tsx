@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { TransitionLink as Link } from '@/components/TransitionLink';
 import { type ReactNode } from 'react';
 
 export function DisplayHeading({

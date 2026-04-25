@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import Link from 'next/link';
+import { TransitionLink as Link } from '@/components/TransitionLink';
 import { usePathname } from 'next/navigation';
 
 const NAV = [

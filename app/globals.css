@@ -71,6 +71,45 @@ body {
   }
 }
 
+/* ─── View Transitions ──────────────────────────────────────────
+   Soft cross-fade between routes. The new view fades up while the
+   old view fades down — same easing and duration so the swap reads
+   as a single dissolve, not two separate animations. Non-supporting
+   browsers ignore these rules and get the default instant nav. */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: sitio-fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: sitio-fade-in;
+}
+
+@keyframes sitio-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes sitio-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 /* ─── Animated headline letters ──────────────────────────────────
    Per-letter reveal + variable-weight breathing. Each .sitio-letter
    starts invisible and animates to opacity 1 with a small upward

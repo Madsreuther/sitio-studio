@@ -116,7 +116,8 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[15px] font-medium hover:bg-[var(--color-ink-soft)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[15px] font-medium tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:bg-[var(--color-ink-soft)] hover:-translate-y-[1px] hover:shadow-[0_12px_32px_-12px_rgba(165,124,82,0.35)] active:translate-y-0 active:shadow-none disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none"
+          style={{ transitionTimingFunction: 'var(--sitio-ease)' }}
         >
           {status === 'submitting' ? 'Sending…' : 'Send message'}
         </button>
@@ -155,7 +156,7 @@ function Field({
         placeholder={placeholder}
         autoComplete={autoComplete}
         inputMode={inputMode}
-        className="w-full h-12 px-4 bg-[var(--color-cream-deep)]/70 border border-[var(--color-rule)] rounded-md text-[16px] text-[var(--color-ink)] placeholder:text-[var(--color-ink-muted)]/60 focus:border-[var(--color-ink)] focus:bg-[var(--color-cream)] focus:outline-none focus:ring-2 focus:ring-[var(--color-ink)]/10 transition-colors"
+        className="w-full h-12 px-4 bg-[var(--color-cream-deep)]/70 border border-[var(--color-rule)] rounded-md text-[16px] text-[var(--color-ink)] placeholder:text-[var(--color-ink-muted)]/60 focus:border-[var(--color-earth)] focus:bg-[var(--color-cream)] focus:outline-none focus:ring-[3px] focus:ring-[var(--color-earth)]/15 transition-colors"
       />
     </label>
   );
@@ -185,7 +186,7 @@ function FieldTextarea({
         rows={rows}
         required={required}
         placeholder={placeholder}
-        className="w-full px-4 py-3 bg-[var(--color-cream-deep)]/70 border border-[var(--color-rule)] rounded-md text-[16px] leading-[1.65] text-[var(--color-ink)] placeholder:text-[var(--color-ink-muted)]/60 focus:border-[var(--color-ink)] focus:bg-[var(--color-cream)] focus:outline-none focus:ring-2 focus:ring-[var(--color-ink)]/10 transition-colors resize-y"
+        className="w-full px-4 py-3 bg-[var(--color-cream-deep)]/70 border border-[var(--color-rule)] rounded-md text-[16px] leading-[1.65] text-[var(--color-ink)] placeholder:text-[var(--color-ink-muted)]/60 focus:border-[var(--color-earth)] focus:bg-[var(--color-cream)] focus:outline-none focus:ring-[3px] focus:ring-[var(--color-earth)]/15 transition-colors resize-y"
       />
     </label>
   );

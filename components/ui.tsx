@@ -108,6 +108,27 @@ export function SecondaryButton({
   );
 }
 
+// InverseButton — the on-dark sibling of PrimaryButton. Used inside
+// any section that has bg-ink (e.g. the home CTA band). Resting state
+// is cream-on-ink; hover lifts -1px and warms the surface a touch via
+// cream-deep, picks up a soft earth-tinted shadow. Never hits pure
+// white.
+export function InverseButton({
+  href,
+  children,
+  className = '',
+}: ButtonBaseProps & { href: string }) {
+  return (
+    <Link
+      href={href}
+      className={`group inline-flex items-center gap-2 h-12 px-6 rounded-full bg-[var(--color-cream)] text-[var(--color-ink)] text-[15px] font-medium tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:bg-[var(--color-cream-deep)] hover:-translate-y-[1px] hover:shadow-[0_12px_32px_-12px_rgba(165,124,82,0.45)] active:translate-y-0 active:shadow-none ${className}`}
+      style={{ transitionTimingFunction: 'var(--sitio-ease)' }}
+    >
+      {children}
+    </Link>
+  );
+}
+
 export function Rule({ className = '' }: { className?: string }) {
   return (
     <hr

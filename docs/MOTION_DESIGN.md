@@ -115,8 +115,13 @@ If yes to all three, ship it. If no to any, fix it before shipping.
 
 ## Future Lottie integration
 
-We considered Lottie in an earlier session and deferred. The site
-holds its restraint without it; it's not a missing feature.
+**Status: deliberately omitted.** Two consecutive sessions reviewed
+this and chose not to ship Lottie. Aesop, Linear, Stripe and
+humaan.com — the reference tier sitiostudio.com aims at — also
+don't use Lottie. The site's restraint is the design choice, not
+an incomplete feature. Add Lottie only if a specific surface
+genuinely earns it (e.g. a future case-study page where motion
+illustrates a specific outcome, not as ambient decoration).
 
 If we add Lottie later, the constraints are:
 

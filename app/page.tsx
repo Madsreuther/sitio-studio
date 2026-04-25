@@ -8,6 +8,7 @@ import {
   Prose,
   PrimaryButton,
   SecondaryButton,
+  InverseButton,
   Rule,
 } from '@/components/ui';
 import {
@@ -250,16 +251,12 @@ export default function HomePage() {
             </h2>
           </Reveal>
           <Reveal delayMs={180}>
-            <div className="mt-10 flex items-center justify-center gap-3">
-              <Link
-                href="/contact"
-                className="inline-flex items-center h-12 px-7 rounded-full bg-[var(--color-cream)] text-[var(--color-ink)] text-[15px] font-medium hover:bg-white transition-colors"
-              >
-                Get in touch
-              </Link>
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5">
+              <InverseButton href="/contact">Get in touch</InverseButton>
               <a
                 href="mailto:hello@sitiostudio.com"
-                className="text-[14px] text-[var(--color-cream)]/80 hover:text-[var(--color-cream)] underline decoration-[var(--color-earth)] underline-offset-4"
+                className="text-[14px] text-[var(--color-cream)]/80 hover:text-[var(--color-cream)] underline decoration-[var(--color-earth)] decoration-1 underline-offset-[6px] transition-colors duration-300"
+                style={{ transitionTimingFunction: 'var(--sitio-ease)' }}
               >
                 hello@sitiostudio.com
               </a>

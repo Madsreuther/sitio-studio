@@ -1,4 +1,23 @@
 {
-  "generated_at": "2026-04-25T08:23:22.023Z",
-  "entries": []
+  "generated_at": "2026-04-25T08:58:37.909Z",
+  "entries": [
+    {
+      "id": "craft-table",
+      "file": "craft-table.png",
+      "width": 1536,
+      "height": 864,
+      "prompt": "Top-down editorial photograph: a craft worktable with a length of unbleached linen, a small clay cup, a folded sheet of cream paper, soft window light, warm earth and cream palette, restful composition. No text, no logos.",
+      "generated_at": "2026-04-25T08:58:34.813Z",
+      "seed": 1948726278
+    },
+    {
+      "id": "sun-stone",
+      "file": "sun-stone.png",
+      "width": 1536,
+      "height": 864,
+      "prompt": "Smooth river stones on warm sand under late afternoon sun, very soft shadows, neutral cream and earth palette, abstract minimal, calm. Editorial. No text, no logos.",
+      "generated_at": "2026-04-25T08:58:37.909Z",
+      "seed": 1105473401
+    }
+  ]
 }

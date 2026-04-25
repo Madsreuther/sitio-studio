@@ -208,7 +208,7 @@ export default function ProcessPage() {
               <Reveal key={f.q} delayMs={Math.min(i, 8) * 40}>
                 <div
                   className="group relative py-6 border-b last:border-b-0 border-[var(--color-rule)]/70 transition-colors duration-300"
-                  style={{ transitionTimingFunction: 'cubic-bezier(0.2,0.7,0.2,1)' }}
+                  style={{ transitionTimingFunction: 'var(--sitio-ease)' }}
                 >
                   {/* Earth left-rule that fades in on hover. Editorial
                       cue without changing the FAQ rhythm. */}

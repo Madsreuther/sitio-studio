@@ -198,7 +198,7 @@ function PriceCard({
   return (
     <div
       className="rounded-md border border-[var(--color-rule)] bg-[var(--color-cream)] p-8 md:p-10 transition-[border-color,box-shadow,transform] duration-500 hover:border-[var(--color-earth)]/45 hover:shadow-[0_24px_50px_-30px_rgba(165,124,82,0.35)] hover:-translate-y-[2px]"
-      style={{ transitionTimingFunction: 'cubic-bezier(0.2,0.7,0.2,1)' }}
+      style={{ transitionTimingFunction: 'var(--sitio-ease)' }}
     >
       <span className="text-[11px] uppercase tracking-[0.22em] text-[var(--color-earth)]">
         {label}

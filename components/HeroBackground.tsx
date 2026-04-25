@@ -41,7 +41,7 @@ export function HeroBackground({ manifest }: { manifest: HeroManifest | null }) 
             className="absolute inset-0"
             style={{
               opacity: loaded ? 1 : 0,
-              transition: 'opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1)',
+              transition: 'opacity 700ms var(--sitio-ease)',
             }}
           >
             <Image
@@ -72,7 +72,7 @@ export function HeroBackground({ manifest }: { manifest: HeroManifest | null }) 
               background:
                 'linear-gradient(125deg, rgba(245,241,235,0.65) 0%, rgba(245,241,235,0.42) 45%, rgba(245,241,235,0.2) 100%)',
               opacity: loaded ? 1 : 0,
-              transition: 'opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1)',
+              transition: 'opacity 700ms var(--sitio-ease)',
             }}
           />
 
@@ -85,7 +85,7 @@ export function HeroBackground({ manifest }: { manifest: HeroManifest | null }) 
               background:
                 'radial-gradient(ellipse 60% 55% at 18% 22%, rgba(255,240,210,0.18) 0%, rgba(255,240,210,0) 70%)',
               opacity: loaded ? 1 : 0,
-              transition: 'opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1)',
+              transition: 'opacity 900ms var(--sitio-ease)',
             }}
           />
         </>

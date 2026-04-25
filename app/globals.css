@@ -16,6 +16,14 @@
 
   --font-serif: var(--font-fraunces);
   --font-sans: var(--font-inter);
+
+  /* Shared motion language — every transition site-wide should use
+     this easing curve and one of these durations. Same curve drives
+     headline rise, page cross-fade, button hover, card hover. */
+  --sitio-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --sitio-dur-fast: 200ms;
+  --sitio-dur-mid: 320ms;
+  --sitio-dur-slow: 500ms;
 }
 
 html {

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 // Mock website thumbnail — reads as a generic beautiful website of the
 // business type. Nav bar + hero title + tagline + CTA + hero visual,
 // all in SVG primitives so there is no CSS-background dependency and no
@@ -90,19 +92,20 @@ export function SelectedWorkThumbnail({
   aiW?: number;
   aiH?: number;
 }) {
-  // AI variant — the path /ai-cache/work/<variant>.png served from the
-  // CDN. We render a plain <img> here (not next/image) so the component
-  // stays a pure RSC fragment with no client-side hydration.
+  // AI variant — render via next/image so the CDN serves a properly
+  // sized variant for each card slot. Gallery is 1/2/4 columns, so a
+  // 1280-wide source is overkill on mobile. The parent has aspect-[4/3]
+  // + relative + overflow-hidden; `fill` keeps the image edge-to-edge
+  // without layout shift.
   if (aiSrc) {
     return (
-      <img
+      <Image
         src={aiSrc}
         alt={`Sample ${variant} website mockup`}
-        width={aiW ?? 1280}
-        height={aiH ?? 960}
-        loading="lazy"
-        decoding="async"
-        className="w-full h-full block object-cover"
+        fill
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+        quality={82}
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
       />
     );
   }

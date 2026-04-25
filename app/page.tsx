@@ -286,8 +286,8 @@ function SampleCard({
 }) {
   const ai = workManifest?.[variant];
   return (
-    <figure className="block">
-      <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-[var(--color-cream-deep)] ring-1 ring-[var(--color-rule)]/70">
+    <figure className="group block">
+      <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-[var(--color-cream-deep)] ring-1 ring-[var(--color-rule)]/70 transition-shadow duration-500 ease-out group-hover:ring-[var(--color-earth)]/40 group-hover:shadow-[0_18px_40px_-22px_rgba(26,24,20,0.35)]">
         <SelectedWorkThumbnail
           variant={variant}
           aiSrc={ai ? `/ai-cache/work/${ai.file}` : undefined}

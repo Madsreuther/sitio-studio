@@ -3,6 +3,8 @@ import { Fraunces, Inter } from 'next/font/google';
 import './globals.css';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
+import { CustomCursor } from '@/components/CustomCursor';
+import { TimeOfDayTint } from '@/components/TimeOfDayTint';
 
 const fraunces = Fraunces({
   variable: '--font-fraunces',
@@ -50,9 +52,11 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} h-full`}
     >
       <body className="min-h-full flex flex-col">
+        <TimeOfDayTint />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <CustomCursor />
       </body>
     </html>
   );

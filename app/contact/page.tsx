@@ -49,6 +49,7 @@ export default function ContactPage() {
 
       <section className="pb-24 md:pb-32">
         <NarrowContainer>
+         <Reveal>
           <div className="border-t border-[var(--color-rule)] pt-10 grid sm:grid-cols-3 gap-6 text-[14px] text-[var(--color-ink-muted)] leading-[1.7]">
             <div>
               <h4 className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-ink)] mb-2">
@@ -69,6 +70,7 @@ export default function ContactPage() {
               <p>EN · DA · ES · IT · FR · DE</p>
             </div>
           </div>
+         </Reveal>
         </NarrowContainer>
       </section>
     </>

@@ -26,56 +26,60 @@ export function AnimatedHeadline({ children, className = '' }: Props) {
     setReduce(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   }, []);
 
-  // Convert React children into a flat array of nodes that we can split
-  // on whitespace. Each top-level child is rendered as a span, with
-  // string fragments split into individual letters. Non-string nodes
-  // (e.g. <span> inside the headline) keep their structure but their
-  // text contents become per-letter spans too.
-  const tokens = React.useMemo(() => {
-    return splitChildren(children);
-  }, [children]);
+  // Splits children into a flat list of tokens. Strings split on
+  // whitespace into word/space tokens; element children become "group"
+  // tokens whose own children are recursively token-split, so the
+  // wrapper span (style + className) survives but spaces inside it
+  // are still preserved as actual whitespace, not letter-eaten.
+  const tokens = React.useMemo(() => splitChildren(children), [children]);
 
   if (reduce) {
     // Static fallback — preserve the original DOM shape.
     return <span className={className}>{children}</span>;
   }
 
-  let letterIndex = 0;
+  // Threaded letter index so the cross-token stagger reads as one wave,
+  // not as separate per-token waves. Reset to 0 on each render.
+  const counter = { i: 0 };
   return (
     <span className={className}>
-      {tokens.map((tok, i) => {
-        if (tok.type === 'space') return <span key={`s-${i}`}>{' '}</span>;
-        if (tok.type === 'word') {
-          // Render a non-breaking word so the per-letter spans
-          // don't break across the line in the middle of a word.
+      {tokens.map((tok, idx) => renderToken(tok, idx, counter))}
+    </span>
+  );
+}
+
+// ─── Render ─────────────────────────────────────────────────────────
+
+function renderToken(tok: Token, key: number, counter: { i: number }): React.ReactNode {
+  if (tok.type === 'space') {
+    // Plain space — sits between word tokens (or sibling tokens) and
+    // wears no styling so the browser's normal whitespace rules apply.
+    return <React.Fragment key={`s-${key}`}>{' '}</React.Fragment>;
+  }
+  if (tok.type === 'word') {
+    return (
+      <span key={`w-${key}`} className="inline-block whitespace-nowrap">
+        {tok.letters.map((ch) => {
+          const i = counter.i++;
           return (
-            <span key={`w-${i}`} className="inline-block whitespace-nowrap">
-              {tok.letters.map((ch) => {
-                const idx = letterIndex++;
-                return (
-                  <Letter key={`l-${idx}`} index={idx}>
-                    {ch}
-                  </Letter>
-                );
-              })}
-            </span>
+            <Letter key={`l-${i}`} index={i}>
+              {ch}
+            </Letter>
           );
-        }
-        // Wrapped in a span (e.g. earth-colored fragment) — render the
-        // wrapper, recurse on its children with their own letter spans.
-        return (
-          <span key={`g-${i}`} style={tok.style} className={tok.className}>
-            {tok.letters.map((ch) => {
-              const idx = letterIndex++;
-              return (
-                <Letter key={`l-${idx}`} index={idx}>
-                  {ch}
-                </Letter>
-              );
-            })}
-          </span>
-        );
-      })}
+        })}
+      </span>
+    );
+  }
+  // group — render the wrapper span with original style/className, then
+  // walk its sub-tokens. Spaces inside the wrapper render as plain
+  // whitespace; words become per-letter animated spans like everything
+  // else. This is the bit the previous version got wrong: it was
+  // splitting the group's text into individual chars (including spaces)
+  // and wrapping every one in inline-block <Letter>, which made the
+  // single-space children visually disappear.
+  return (
+    <span key={`g-${key}`} style={tok.style} className={tok.className}>
+      {tok.tokens.map((sub, subIdx) => renderToken(sub, subIdx, counter))}
     </span>
   );
 }
@@ -94,44 +98,54 @@ function Letter({ index, children }: { index: number; children: string }) {
 }
 
 // ─── Children splitter ──────────────────────────────────────────────
-// Handles a small subset of React children:
-//   - plain strings      → split on whitespace into word-tokens
-//   - <span style className>text</span>  → "group" token, letters split
-// Anything else falls back to passthrough as a word-token whose first
-// letter is the whole thing (so we don't crash on unexpected input).
+
+type LeafToken = { type: 'space' } | { type: 'word'; letters: string[] };
 
 type Token =
-  | { type: 'space' }
-  | { type: 'word'; letters: string[] }
-  | { type: 'group'; letters: string[]; style?: React.CSSProperties; className?: string };
+  | LeafToken
+  | { type: 'group'; tokens: LeafToken[]; style?: React.CSSProperties; className?: string };
 
 function splitChildren(children: React.ReactNode): Token[] {
   const out: Token[] = [];
   React.Children.forEach(children, (child) => {
     if (child === null || child === undefined || typeof child === 'boolean') return;
     if (typeof child === 'string' || typeof child === 'number') {
-      pushString(out, String(child));
+      pushStringTokens(out, String(child));
       return;
     }
     if (React.isValidElement(child)) {
-      const props = child.props as { children?: React.ReactNode; style?: React.CSSProperties; className?: string };
-      const inner = props.children;
-      const text = innerText(inner);
+      const props = child.props as {
+        children?: React.ReactNode;
+        style?: React.CSSProperties;
+        className?: string;
+      };
+      const text = innerText(props.children);
+      // pushStringTokens only ever writes word/space tokens, so this
+      // sub array is always LeafToken[] at runtime — the cast keeps
+      // the function signature unified without lying about the data.
+      const sub: Token[] = [];
+      pushStringTokens(sub, text);
       out.push({
         type: 'group',
-        letters: [...text],
+        tokens: sub as LeafToken[],
         style: props.style,
         className: props.className,
       });
-      return;
     }
   });
   return out;
 }
 
-function pushString(out: Token[], s: string) {
+// Push word + space tokens onto `out` from a raw string. Repeated
+// whitespace collapses to a single space token (matches the way
+// browsers render contiguous whitespace anyway). The parameter type
+// is intentionally Token[] (not LeafToken[]) so the same helper can
+// write into either the top-level Token array or a group's leaf-only
+// array — only word/space tokens are ever produced.
+function pushStringTokens(out: Token[], s: string) {
   let buf = '';
-  const flush = () => {
+  let pendingSpace = false;
+  const flushWord = () => {
     if (buf.length > 0) {
       out.push({ type: 'word', letters: [...buf] });
       buf = '';
@@ -139,13 +153,18 @@ function pushString(out: Token[], s: string) {
   };
   for (const ch of s) {
     if (/\s/.test(ch)) {
-      flush();
-      out.push({ type: 'space' });
+      flushWord();
+      pendingSpace = true;
     } else {
+      if (pendingSpace) {
+        out.push({ type: 'space' });
+        pendingSpace = false;
+      }
       buf += ch;
     }
   }
-  flush();
+  flushWord();
+  if (pendingSpace) out.push({ type: 'space' });
 }
 
 function innerText(node: React.ReactNode): string {

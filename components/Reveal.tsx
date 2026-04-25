@@ -4,18 +4,20 @@ import * as React from 'react';
 
 // Minimal IntersectionObserver-based fade-up. Opt-in per node via className.
 // Respects prefers-reduced-motion because the keyframe is gated in globals.css.
+//
+// Polymorphic `as` was removed — every call site in the codebase uses the
+// default <div> wrapper, and the polymorphic typing tripped over a stricter
+// @types/react bump. Single-element spec is plenty for this surface.
 export function Reveal({
   children,
   delayMs = 0,
-  as: Tag = 'div',
   className = '',
 }: {
   children: React.ReactNode;
   delayMs?: number;
-  as?: React.ElementType;
   className?: string;
 }) {
-  const ref = React.useRef<HTMLElement | null>(null);
+  const ref = React.useRef<HTMLDivElement | null>(null);
   const [shown, setShown] = React.useState(false);
 
   React.useEffect(() => {
@@ -37,12 +39,12 @@ export function Reveal({
   }, []);
 
   return (
-    <Tag
-      ref={ref as React.Ref<HTMLElement>}
+    <div
+      ref={ref}
       className={`sitio-reveal ${shown ? 'sitio-revealed' : ''} ${className}`}
       style={shown && delayMs ? { animationDelay: `${delayMs}ms` } : undefined}
     >
       {children}
-    </Tag>
+    </div>
   );
 }

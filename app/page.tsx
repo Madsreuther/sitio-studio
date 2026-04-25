@@ -15,7 +15,7 @@ import {
   type WorkVariant,
 } from '@/components/placeholders/SelectedWorkThumbnail';
 import { FoundersIllustration } from '@/components/placeholders/FoundersIllustration';
-import { HeroBackdrop } from '@/components/HeroBackdrop';
+import { HeroScene3D } from '@/components/HeroScene';
 
 // Small curated sample list. Images intentionally not wired to live previews
 // yet — placeholder gradients keep the page fast and predictable until real
@@ -63,7 +63,18 @@ export default function HomePage() {
     <>
       {/* HERO ──────────────────────────────────────────────────────── */}
       <section className="relative isolate pt-20 md:pt-32 pb-24 md:pb-32 overflow-hidden">
-        <HeroBackdrop />
+        <HeroScene3D />
+        {/* Soft cream wash behind the headline so type stays readable
+            when a brighter form drifts behind it. radial-gradient sits
+            above the canvas (-z-10 below) but under the type stack. */}
+        <div
+          aria-hidden
+          className="absolute inset-y-0 left-0 right-0 -z-[5] pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 56% 70% at 28% 42%, rgba(245,241,235,0.78) 0%, rgba(245,241,235,0) 70%)',
+          }}
+        />
         <Container>
           <Reveal>
             <Eyebrow>Copenhagen · est. 2024</Eyebrow>

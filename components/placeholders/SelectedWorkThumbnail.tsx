@@ -78,9 +78,35 @@ const MOCK_HEADLINES: Record<WorkVariant, string> = {
 
 export function SelectedWorkThumbnail({
   variant,
+  aiSrc,
+  aiW,
+  aiH,
 }: {
   variant: WorkVariant;
+  /** When provided, render an AI-generated PNG mockup instead of the
+   *  procedural SVG. Width/height should match the source so next/image
+   *  emits the right intrinsic ratio. */
+  aiSrc?: string;
+  aiW?: number;
+  aiH?: number;
 }) {
+  // AI variant — the path /ai-cache/work/<variant>.png served from the
+  // CDN. We render a plain <img> here (not next/image) so the component
+  // stays a pure RSC fragment with no client-side hydration.
+  if (aiSrc) {
+    return (
+      <img
+        src={aiSrc}
+        alt={`Sample ${variant} website mockup`}
+        width={aiW ?? 1280}
+        height={aiH ?? 960}
+        loading="lazy"
+        decoding="async"
+        className="w-full h-full block object-cover"
+      />
+    );
+  }
+
   const p = PALETTES[variant];
   const headline = MOCK_HEADLINES[variant];
   const id = `mock-${variant}`;

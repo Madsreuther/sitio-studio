@@ -16,6 +16,8 @@ import {
 } from '@/components/placeholders/SelectedWorkThumbnail';
 import { FoundersIllustration } from '@/components/placeholders/FoundersIllustration';
 import { HeroScene3D } from '@/components/HeroScene';
+import { HeroAiWash } from '@/components/HeroAiWash';
+import { readHeroManifest, readWorkManifest } from '@/lib/ai/manifest';
 
 // Small curated sample list. Images intentionally not wired to live previews
 // yet — placeholder gradients keep the page fast and predictable until real
@@ -59,11 +61,18 @@ const PILLARS = [
 ];
 
 export default function HomePage() {
+  // Read at build/render time on the server. Manifest is null until the
+  // FAL generator has been run; the wash + work card components no-op
+  // in that case and the existing visuals stay in place.
+  const heroManifest = readHeroManifest();
+  const workManifest = readWorkManifest();
+
   return (
     <>
       {/* HERO ──────────────────────────────────────────────────────── */}
       <section className="relative isolate pt-20 md:pt-32 pb-24 md:pb-32 overflow-hidden">
         <HeroScene3D />
+        <HeroAiWash manifest={heroManifest} />
         {/* Soft cream wash behind the headline so type stays readable
             when a brighter form drifts behind it. radial-gradient sits
             above the canvas (-z-10 below) but under the type stack. */}
@@ -184,7 +193,12 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-5 lg:gap-6">
             {SAMPLES.map((s, i) => (
               <Reveal key={`${s.kind}-${s.region}`} delayMs={i * 80}>
-                <SampleCard kind={s.kind} region={s.region} variant={s.variant} />
+                <SampleCard
+                  kind={s.kind}
+                  region={s.region}
+                  variant={s.variant}
+                  workManifest={workManifest}
+                />
               </Reveal>
             ))}
           </div>
@@ -269,15 +283,23 @@ function SampleCard({
   kind,
   region,
   variant,
+  workManifest,
 }: {
   kind: string;
   region: string;
   variant: WorkVariant;
+  workManifest: ReturnType<typeof readWorkManifest>;
 }) {
+  const ai = workManifest?.[variant];
   return (
     <figure className="block">
       <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-[var(--color-cream-deep)] ring-1 ring-[var(--color-rule)]/70">
-        <SelectedWorkThumbnail variant={variant} />
+        <SelectedWorkThumbnail
+          variant={variant}
+          aiSrc={ai ? `/ai-cache/work/${ai.file}` : undefined}
+          aiW={ai?.width}
+          aiH={ai?.height}
+        />
       </div>
       <figcaption className="mt-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <span className="font-[var(--font-serif)] italic text-[16px] lg:text-[15px] text-[var(--color-ink)]">

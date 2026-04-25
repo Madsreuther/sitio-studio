@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 // Build-time generator for the AI hero wash images.
 // Usage:
-//   FAL_KEY=... npx tsx scripts/gen-ai-hero.ts
+//   FAL_KEY_2=... npx tsx scripts/gen-ai-hero.ts
 //
 // Writes 7 PNGs into public/ai-cache/hero/ + a manifest.json the
 // runtime hero component reads at module evaluation time. Re-run
@@ -36,8 +36,8 @@ type ManifestEntry = {
 };
 
 async function main() {
-  if (!process.env.FAL_KEY) {
-    console.error('FAL_KEY not set — refusing to run.');
+  if (!process.env.FAL_KEY_2) {
+    console.error('FAL_KEY_2 not set — refusing to run.');
     process.exit(1);
   }
   await fs.mkdir(OUT_DIR, { recursive: true });

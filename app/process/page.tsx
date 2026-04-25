@@ -206,7 +206,16 @@ export default function ProcessPage() {
           <div className="mt-12 flex flex-col">
             {FAQS.map((f, i) => (
               <Reveal key={f.q} delayMs={Math.min(i, 8) * 40}>
-                <div className="py-6 border-b last:border-b-0 border-[var(--color-rule)]/70">
+                <div
+                  className="group relative py-6 border-b last:border-b-0 border-[var(--color-rule)]/70 transition-colors duration-300"
+                  style={{ transitionTimingFunction: 'cubic-bezier(0.2,0.7,0.2,1)' }}
+                >
+                  {/* Earth left-rule that fades in on hover. Editorial
+                      cue without changing the FAQ rhythm. */}
+                  <span
+                    aria-hidden
+                    className="absolute -left-3 top-7 bottom-6 w-[2px] bg-[var(--color-earth)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  />
                   <h3 className="font-[var(--font-serif)] text-[20px] md:text-[22px] tracking-[-0.005em] text-[var(--color-ink)]">
                     {f.q}
                   </h3>

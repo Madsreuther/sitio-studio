@@ -18,6 +18,9 @@ type Props = LinkProps & {
   target?: string;
   rel?: string;
   'aria-label'?: string;
+  style?: React.CSSProperties;
+  // Loose escape hatch for Tailwind/data attributes set inline by callers.
+  [key: `data-${string}`]: string | undefined;
 };
 
 export function TransitionLink(props: Props) {

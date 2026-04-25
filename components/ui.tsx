@@ -72,6 +72,14 @@ type ButtonBaseProps = {
   className?: string;
 };
 
+// Shared motion language across all interactive surfaces:
+//   ease  cubic-bezier(0.2, 0.7, 0.2, 1) — same as headline rise + page xfade
+//   dur   320ms — long enough to feel intentional, short enough to feel snappy
+// Buttons lift 1px and pick up a faint earth-glow shadow on hover; press
+// returns them to baseline so the click feels weighted.
+
+const SITIO_EASE = 'cubic-bezier(0.2,0.7,0.2,1)';
+
 export function PrimaryButton({
   href,
   children,
@@ -80,7 +88,8 @@ export function PrimaryButton({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center h-12 px-6 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[15px] font-medium tracking-wide hover:bg-[var(--color-ink-soft)] transition-colors ${className}`}
+      className={`group inline-flex items-center gap-2 h-12 px-6 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[15px] font-medium tracking-wide transition-[transform,box-shadow,background-color] duration-300 hover:bg-[var(--color-ink-soft)] hover:-translate-y-[1px] hover:shadow-[0_12px_32px_-12px_rgba(165,124,82,0.35)] active:translate-y-0 active:shadow-none ${className}`}
+      style={{ transitionTimingFunction: SITIO_EASE }}
     >
       {children}
     </Link>
@@ -95,7 +104,8 @@ export function SecondaryButton({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center h-12 px-6 rounded-full border border-[var(--color-ink)]/30 text-[var(--color-ink)] text-[15px] font-medium tracking-wide hover:border-[var(--color-ink)] hover:bg-[var(--color-ink)]/[0.03] transition-all ${className}`}
+      className={`group inline-flex items-center gap-2 h-12 px-6 rounded-full border border-[var(--color-ink)]/30 text-[var(--color-ink)] text-[15px] font-medium tracking-wide transition-[transform,box-shadow,border-color,background-color] duration-300 hover:border-[var(--color-ink)] hover:bg-[var(--color-ink)]/[0.03] hover:-translate-y-[1px] hover:shadow-[0_12px_32px_-18px_rgba(26,24,20,0.35)] active:translate-y-0 active:shadow-none ${className}`}
+      style={{ transitionTimingFunction: SITIO_EASE }}
     >
       {children}
     </Link>

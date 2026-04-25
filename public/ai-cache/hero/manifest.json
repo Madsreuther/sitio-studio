@@ -1,14 +1,41 @@
 {
-  "generated_at": "2026-04-25T08:58:37.909Z",
+  "generated_at": "2026-04-25T09:06:19.235Z",
   "entries": [
     {
-      "id": "craft-table",
-      "file": "craft-table.png",
+      "id": "paper-light",
+      "file": "paper-light.png",
       "width": 1536,
       "height": 864,
-      "prompt": "Top-down editorial photograph: a craft worktable with a length of unbleached linen, a small clay cup, a folded sheet of cream paper, soft window light, warm earth and cream palette, restful composition. No text, no logos.",
-      "generated_at": "2026-04-25T08:58:34.813Z",
-      "seed": 1948726278
+      "prompt": "Editorial fine-art photograph: a stack of cream watercolor paper sheets resting on a warm beige plaster surface, golden afternoon sunlight raking from the upper left, soft shadow edges, warm grain, color palette of cream, sand, soft terracotta. Shot on medium format film. Calm, minimal, restful. No text, no logos.",
+      "generated_at": "2026-04-25T09:06:07.427Z",
+      "seed": 462124641
+    },
+    {
+      "id": "linen-table",
+      "file": "linen-table.png",
+      "width": 1536,
+      "height": 864,
+      "prompt": "Editorial photograph: a length of unbleached natural linen folded across a worn wooden table in a sunlit Mediterranean atelier, warm afternoon light from a high window, soft shadow play, cream and tan tones, almost monochrome. Editorial magazine feel. No text, no people, no logos.",
+      "generated_at": "2026-04-25T09:06:10.107Z",
+      "seed": 911488743
+    },
+    {
+      "id": "architectural-light",
+      "file": "architectural-light.png",
+      "width": 1536,
+      "height": 864,
+      "prompt": "Architectural detail photograph: a corner of a sun-warmed plaster wall meeting a smooth beige stone floor, late afternoon raking light through a tall window, soft dust in the air, almost monochromatic warm palette, calm and minimal. Editorial. No text, no logos.",
+      "generated_at": "2026-04-25T09:06:12.944Z",
+      "seed": 1911961724
+    },
+    {
+      "id": "terraced-hills",
+      "file": "terraced-hills.png",
+      "width": 1536,
+      "height": 864,
+      "prompt": "Soft-focus warm photograph of Mediterranean terraced countryside at golden hour, low stone walls layered up the slope, warm dust in the late light, sage green and cream tones, gentle abstract composition. Painterly. Editorial magazine feel. No text, no logos.",
+      "generated_at": "2026-04-25T09:06:15.180Z",
+      "seed": 1159205086
     },
     {
       "id": "sun-stone",
@@ -16,8 +43,8 @@
       "width": 1536,
       "height": 864,
       "prompt": "Smooth river stones on warm sand under late afternoon sun, very soft shadows, neutral cream and earth palette, abstract minimal, calm. Editorial. No text, no logos.",
-      "generated_at": "2026-04-25T08:58:37.909Z",
-      "seed": 1105473401
+      "generated_at": "2026-04-25T09:06:19.235Z",
+      "seed": 840978245
     }
   ]
 }

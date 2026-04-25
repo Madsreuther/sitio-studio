@@ -1,14 +1,41 @@
 {
-  "generated_at": "2026-04-25T08:59:12.783Z",
+  "generated_at": "2026-04-25T09:07:06.018Z",
   "entries": [
+    {
+      "variant": "hospitality",
+      "file": "hospitality.png",
+      "width": 1280,
+      "height": 960,
+      "generated_at": "2026-04-25T09:06:57.173Z",
+      "seed": 963181754,
+      "prompt": "Minimalist hotel website mockup: hero photograph of a sun-bleached Mediterranean stone courtyard with arched windows at golden hour, warm editorial photography, simple top navigation bar, italic serif title, generous whitespace, cream and ochre palette. Web design portfolio screenshot. No fake text — visual blocks only."
+    },
+    {
+      "variant": "leisure",
+      "file": "leisure.png",
+      "width": 1280,
+      "height": 960,
+      "generated_at": "2026-04-25T09:07:00.539Z",
+      "seed": 1088467807,
+      "prompt": "Editorial restaurant website mockup: hero photograph of a sunlit dining room with a terracotta tiled floor and a tall open window, warm midday light, italic serif headline overlay, soft cream and tan tones, very minimal top navigation, premium magazine feel. Web design portfolio screenshot."
+    },
     {
       "variant": "health",
       "file": "health.png",
       "width": 1280,
       "height": 960,
-      "generated_at": "2026-04-25T08:59:12.599Z",
-      "seed": 1311663592,
+      "generated_at": "2026-04-25T09:07:03.087Z",
+      "seed": 1321624743,
       "prompt": "Calm clinic website mockup, hero photograph of soft beige interior with single chair and large window, daylight, italic serif headline, very white space, cream and sage tones, medical-but-warm. Web design portfolio screenshot."
+    },
+    {
+      "variant": "wine",
+      "file": "wine.png",
+      "width": 1280,
+      "height": 960,
+      "generated_at": "2026-04-25T09:07:06.017Z",
+      "seed": 2073192798,
+      "prompt": "Boutique estate website mockup: hero photograph of rolling Mediterranean countryside with terraced stone walls and a single farmhouse at sunset, warm earth and cream palette, italic serif headline overlay, clean top navigation, premium estate aesthetic. Web design portfolio screenshot."
     }
   ]
 }

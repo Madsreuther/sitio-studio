@@ -86,6 +86,15 @@ const AVATAR_VARIANT: Record<Variant, MikeVariant> = {
   admin: 'admin',
 };
 
+// Per-variant persona name. The marketing site (sitiostudio.com)
+// uses James as the sales-side voice; editor and admin surfaces
+// stay as Mads.
+const PERSONA_NAME: Record<Variant, string> = {
+  sitiostudio: 'James',
+  editor: 'Mads',
+  admin: 'Mads',
+};
+
 export function MikeChatWidget({
   surface,
   variant = 'sitiostudio',
@@ -102,6 +111,9 @@ export function MikeChatWidget({
   greeting?: string;
 }) {
   const styles = VARIANT_STYLES[variant];
+  const personaName = PERSONA_NAME[variant];
+  const effectiveGreeting =
+    greeting ?? `Hi, I'm ${personaName}. How can I help?`;
   const [open, setOpen] = React.useState(false);
   const [sessionId, setSessionId] = React.useState<string | null>(null);
   const [messages, setMessages] = React.useState<Message[]>([]);
@@ -128,18 +140,16 @@ export function MikeChatWidget({
     const body = await r.json();
     if (!r.ok) throw new Error(body.error ?? 'session create failed');
     setSessionId(body.session_id);
-    if (greeting) {
-      setMessages([
-        {
-          id: 'greeting',
-          role: 'assistant',
-          content: greeting,
-          created_at: new Date().toISOString(),
-        },
-      ]);
-    }
+    setMessages([
+      {
+        id: 'greeting',
+        role: 'assistant',
+        content: effectiveGreeting,
+        created_at: new Date().toISOString(),
+      },
+    ]);
     return body.session_id as string;
-  }, [apiBase, customerEmail, draftId, greeting, sessionId, surface]);
+  }, [apiBase, customerEmail, draftId, effectiveGreeting, sessionId, surface]);
 
   React.useEffect(() => {
     if (!open) return;
@@ -214,7 +224,7 @@ export function MikeChatWidget({
         aria-label="Open chat"
       >
         <MikeAvatar size={28} state="idle" variant={AVATAR_VARIANT[variant]} />
-        <span>Chat with Mads</span>
+        <span>Chat with {personaName}</span>
       </button>
     );
   }
@@ -229,7 +239,7 @@ export function MikeChatWidget({
         <div className="flex items-center gap-2">
           <MikeAvatar size={32} state={sending ? 'typing' : 'idle'} variant={AVATAR_VARIANT[variant]} />
           <div className="leading-tight">
-            <div className="text-sm font-semibold">Mads from sitio</div>
+            <div className="text-sm font-semibold">{personaName} from sitio</div>
             <div className="text-[11px] opacity-70">
               {escalated ? 'Reply within 24h' : 'Usually replies in seconds'}
             </div>
@@ -284,7 +294,7 @@ export function MikeChatWidget({
 
       {escalated && (
         <div className="px-4 py-2 text-xs border-t border-current/10 opacity-80">
-          Mads will follow up by email within 24 hours.
+          {personaName} will follow up by email within 24 hours.
         </div>
       )}
 

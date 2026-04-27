@@ -3,7 +3,6 @@ import { Fraunces, Inter } from 'next/font/google';
 import './globals.css';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
-import { CustomCursor } from '@/components/CustomCursor';
 import { TimeOfDayTint } from '@/components/TimeOfDayTint';
 import { MikeChatWidget } from '@/components/mike/MikeChatWidget';
 import { MikeAvatarStyles } from '@/components/mike/MikeAvatar';
@@ -58,7 +57,6 @@ export default function RootLayout({
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
-        <CustomCursor />
         <MikeAvatarStyles />
         <MikeChatWidget
           surface="sitiostudio_com"

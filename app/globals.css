@@ -161,40 +161,6 @@ body {
   }
 }
 
-/* ─── Custom cursor ──────────────────────────────────────────────
-   Earth-toned dot trailing the real cursor. The OS cursor is hidden
-   site-wide once the custom one is alive, but only on fine pointers
-   (the .sitio-cursor-hide class is added/removed by the component). */
-
-.sitio-cursor {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: var(--color-earth);
-  transition:
-    width 200ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    height 200ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    background-color 200ms ease,
-    border-color 200ms ease,
-    box-shadow 200ms ease;
-  border: 1px solid transparent;
-  mix-blend-mode: multiply;
-  will-change: transform;
-}
-
-.sitio-cursor[data-over='true'] {
-  width: 32px;
-  height: 32px;
-  background: transparent;
-  border-color: var(--color-earth);
-  box-shadow: 0 0 0 1px rgba(165, 124, 82, 0.15);
-}
-
-.sitio-cursor-hide,
-.sitio-cursor-hide * {
-  cursor: none !important;
-}
-
 /* ─── Hero backdrop ──────────────────────────────────────────────
    Four overlapping radial gradients in the cream/earth/ink palette.
    Each blob is a <div> sized in vmax so it scales with the viewport

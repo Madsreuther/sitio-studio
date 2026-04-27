@@ -1,7 +1,7 @@
 // Thin wrapper around @fal-ai/client. Used by build-time generation
 // scripts (scripts/gen-ai-*.ts) — NOT by the runtime app. Keeping FAL
 // off the runtime path means we never charge a visitor request for an
-// image we already have on the CDN, and FAL_KEY_2 never lands in any
+// image we already have on the CDN, and FAL_KEY_3 never lands in any
 // route handler bundle.
 
 import { fal } from '@fal-ai/client';
@@ -24,9 +24,9 @@ let configured = false;
 
 function ensureConfigured() {
   if (configured) return;
-  // Renamed from FAL_KEY → FAL_KEY_2 to match the Vercel env name.
-  const key = process.env.FAL_KEY_2;
-  if (!key) throw new Error('FAL_KEY_2 is not set');
+  // FAL_KEY_3 in Vercel; previous FAL_KEY_2 was rotated/deprecated.
+  const key = process.env.FAL_KEY_3;
+  if (!key) throw new Error('FAL_KEY_3 is not set');
   fal.config({ credentials: key });
   configured = true;
 }

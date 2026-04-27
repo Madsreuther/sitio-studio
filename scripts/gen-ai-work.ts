@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 // Build-time generator for the Selected Work card mockups.
 // Usage:
-//   FAL_KEY_2=... npx tsx scripts/gen-ai-work.ts
+//   FAL_KEY_3=... npx tsx scripts/gen-ai-work.ts
 //
 // Writes one PNG per business-type variant into public/ai-cache/work/
 // + a manifest.json. The runtime SelectedWorkThumbnail keeps its SVG
@@ -36,8 +36,8 @@ type Entry = {
 };
 
 async function main() {
-  if (!process.env.FAL_KEY_2) {
-    console.error('FAL_KEY_2 not set — refusing to run.');
+  if (!process.env.FAL_KEY_3) {
+    console.error('FAL_KEY_3 not set — refusing to run.');
     process.exit(1);
   }
   await fs.mkdir(OUT_DIR, { recursive: true });

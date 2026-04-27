@@ -46,59 +46,88 @@ export const HERO_PROMPTS: ReadonlyArray<{ id: string; prompt: string }> = [
   },
 ] as const;
 
+// House style for every work-case image: pure editorial photography
+// of the BUSINESS, not a website mockup. Flux Schnell does not accept
+// a negative_prompt, so anti-text guards have to live inside the
+// prompt itself. Repeating the no-text language at the end of each
+// prompt is deliberate; Flux weights tail tokens slightly higher and
+// repetition reduces the model's tendency to draw signage / menus /
+// screens / chalkboards.
+const NO_TEXT_TAIL =
+  'No text anywhere in the frame. No words, no letters, no signage, no menu boards, no chalkboards, no labels, no logos, no posters, no books, no laptops, no monitors, no screens, no phones, no website, no UI, no mockup, no graphic design, no overlay. Pure photography only.';
+
 export const WORK_PROMPTS: Record<string, { prompt: string; negative?: string }> = {
   hospitality: {
-    // Was: Mediterranean coastal villa at golden hour. Trip: probably the
-    // compound. New version describes architectural detail in concrete
-    // terms (stone courtyard + arched window) which matches the pattern
-    // that succeeded for "health".
-    prompt:
-      'Minimalist hotel website mockup: hero photograph of a sun-bleached Mediterranean stone courtyard with arched windows at golden hour, warm editorial photography, simple top navigation bar, italic serif title, generous whitespace, cream and ochre palette. Web design portfolio screenshot. No fake text — visual blocks only.',
+    prompt: [
+      'Editorial fine-art photograph of a sun-bleached Mediterranean villa exterior at golden hour:',
+      'whitewashed stone walls, an arched doorway, terracotta roof tiles, a gnarled olive tree casting long late-afternoon shadow across a flagstone courtyard.',
+      'Warm cream and ochre palette, soft golden light raking from low on the horizon, gentle film grain.',
+      'Shot on medium format film, premium travel magazine feel.',
+      NO_TEXT_TAIL,
+    ].join(' '),
   },
   leisure: {
-    // Was: dim candlelit dining room with linen tablecloth. Trip: likely
-    // the dim/candlelit low-light combination. New version is a sunlit
-    // dining room — same restaurant intent, daytime framing.
-    prompt:
-      'Editorial restaurant website mockup: hero photograph of a sunlit dining room with a terracotta tiled floor and a tall open window, warm midday light, italic serif headline overlay, soft cream and tan tones, very minimal top navigation, premium magazine feel. Web design portfolio screenshot.',
+    prompt: [
+      'Editorial fine-art photograph of a candlelit restaurant interior in the early evening:',
+      'a worn wooden table set for two with linen napkins, two stemmed wine glasses catching warm light, a small ceramic carafe, soft amber bokeh in the background suggesting other tables.',
+      'Warm tungsten and amber palette, shallow depth of field, painterly atmosphere.',
+      'Shot on medium format film, fine-dining magazine feel.',
+      NO_TEXT_TAIL,
+    ].join(' '),
   },
   health: {
-    // Untouched — this prompt succeeded on the prior run.
-    prompt:
-      'Calm clinic website mockup, hero photograph of soft beige interior with single chair and large window, daylight, italic serif headline, very white space, cream and sage tones, medical-but-warm. Web design portfolio screenshot.',
+    prompt: [
+      'Editorial architectural photograph of a calm modern dental clinic waiting room interior:',
+      'a single pale linen armchair beside a tall window, polished concrete floor, a small ceramic vase with a single dried branch, warm daylight pouring across the floor.',
+      'Cream and sage palette, minimal, almost monochromatic, generous negative space.',
+      'Shot on a tilt-shift lens, calm and reassuring, editorial restraint.',
+      NO_TEXT_TAIL,
+    ].join(' '),
   },
   wine: {
-    // Was: vineyard rows at sunset, burgundy palette, winery. Trip: the
-    // wine/vineyard cluster. New version frames it as a generic
-    // boutique estate — rolling countryside + farmhouse + stone walls
-    // at sunset. Same atmosphere, no flagged nouns.
-    prompt:
-      'Boutique estate website mockup: hero photograph of rolling Mediterranean countryside with terraced stone walls and a single farmhouse at sunset, warm earth and cream palette, italic serif headline overlay, clean top navigation, premium estate aesthetic. Web design portfolio screenshot.',
+    prompt: [
+      'Editorial fine-art photograph of a vineyard at sunset:',
+      'rows of mature grapevines climbing a gentle terraced slope, low golden sun behind the hills, two oak barrels resting in the foreground on bare earth, soft dust hanging in the warm air.',
+      'Burgundy and amber and dusk-blue palette, painterly, shot on medium format film.',
+      'Premium estate magazine feel.',
+      NO_TEXT_TAIL,
+    ].join(' '),
   },
   yoga: {
-    // Calm minimal studio space with morning sunlight raking across
-    // pale wood floor. No people, no postures (people-prompts have
-    // tripped FAL filters historically).
-    prompt:
-      'Minimal yoga studio website mockup: hero photograph of an empty pale wood-floor studio room with tall windows and warm morning light streaming across the floor, single folded cushion, neutral linen tones, italic serif headline overlay, very simple top navigation, calm editorial photography. Web design portfolio screenshot.',
+    prompt: [
+      'Editorial fine-art photograph of a quiet yoga studio interior in early morning:',
+      'a pale wood floor stretches across the frame, tall industrial-style windows on the far wall, soft golden sunbeams streaming through, one folded grey wool blanket and a single cork block resting on the floor, gentle dust in the air.',
+      'Cream and warm grey palette, generous negative space, almost meditative.',
+      'Shot on medium format film, calm and minimal.',
+      NO_TEXT_TAIL,
+    ].join(' '),
   },
   coffee: {
-    // Warm industrial roastery interior. Concrete-object phrasing
-    // (drum roaster + burlap sack) matches the pattern that has
-    // historically passed FAL.
-    prompt:
-      'Editorial coffee roastery website mockup: hero photograph of a warmly lit industrial roastery interior with a copper drum roaster and stacked burlap sacks, soft afternoon light, warm earth and rust palette, italic serif headline overlay, minimal top navigation, premium magazine feel. Web design portfolio screenshot.',
+    prompt: [
+      'Editorial fine-art photograph of an industrial coffee roastery interior in late afternoon:',
+      'a large copper drum roaster in the foreground, stacks of unmarked plain burlap sacks behind it, polished concrete floor, a single hanging warehouse pendant lamp casting a pool of warm light, soft steam in the air.',
+      'Warm rust and umber palette, gentle haze, painterly atmosphere.',
+      'Shot on medium format film, artisan magazine feel.',
+      NO_TEXT_TAIL,
+    ].join(' '),
   },
   architecture: {
-    // Drafting-table top-down composition. Avoids people and avoids
-    // any flagged construction terms.
-    prompt:
-      'Architecture studio website mockup: hero photograph of a clean wooden drafting table with rolled blueprints, a brass scale ruler, and a soft overhead lamp, neutral cool palette of pale stone and slate blue, daylight from the side, italic serif headline overlay, minimal top navigation, editorial restraint. Web design portfolio screenshot.',
+    prompt: [
+      'Editorial top-down photograph of a clean wooden architecture studio drafting table:',
+      'a single brass scale ruler resting diagonally across the bare table, a small ceramic cup holding three mechanical pencils, a brass drafting compass, a folded grey wool throw, soft window light raking from the side.',
+      'Crucially the drafting paper is COMPLETELY BLANK and ROLLED CLOSED (no drawings, no diagrams, no annotations, no title blocks, no markings of any kind visible).',
+      'Neutral cool palette of pale oak, slate grey, and soft white.',
+      'Shot on medium format film, editorial restraint.',
+      NO_TEXT_TAIL,
+    ].join(' '),
   },
   bakery: {
-    // Warm bakery interior with bread on a wooden counter. No people,
-    // concrete-object only.
-    prompt:
-      'Editorial bakery website mockup: hero photograph of a warm bakery interior with rustic country loaves on a worn wooden counter, soft window light, golden crust tones, cream and amber palette, italic serif headline overlay, minimal top navigation, premium artisan feel. Web design portfolio screenshot.',
+    prompt: [
+      'Editorial fine-art photograph of a warm artisan bakery interior:',
+      'three rustic country sourdough loaves resting on a worn wooden counter dusted with flour, a wicker basket of more loaves to the side, warm soft window light from the left, terracotta tile floor, a single brass scale visible in the soft background.',
+      'Cream and amber and golden-crust palette, gentle film grain, painterly.',
+      'Shot on medium format film, artisan magazine feel.',
+      NO_TEXT_TAIL,
+    ].join(' '),
   },
 } as const;

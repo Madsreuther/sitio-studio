@@ -52,8 +52,37 @@ async function main() {
   }
   await fs.mkdir(OUT_DIR, { recursive: true });
 
+  // --only=variant1,variant2 lets us re-roll a single bad image
+  // without losing the seeds of the others. Default: regenerate
+  // everything.
+  const onlyArg = process.argv.find((a) => a.startsWith('--only='));
+  const onlyList = onlyArg
+    ? onlyArg
+        .slice('--only='.length)
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean)
+    : null;
+
+  // Seed entries from the existing manifest so partial re-rolls
+  // preserve unchanged variants.
+  const manifestPath = path.join(OUT_DIR, 'manifest.json');
   const entries: Entry[] = [];
+  if (onlyList) {
+    try {
+      const prior = JSON.parse(await fs.readFile(manifestPath, 'utf8')) as {
+        entries?: Entry[];
+      };
+      for (const e of prior.entries ?? []) {
+        if (!onlyList.includes(e.variant)) entries.push(e);
+      }
+    } catch {
+      /* no prior manifest — fall through, full run anyway */
+    }
+  }
+
   for (const [variant, preset] of Object.entries(WORK_PROMPTS)) {
+    if (onlyList && !onlyList.includes(variant)) continue;
     process.stdout.write(`→ generating "${variant}"… `);
     const t0 = Date.now();
     try {
@@ -84,7 +113,7 @@ async function main() {
   }
 
   await fs.writeFile(
-    path.join(OUT_DIR, 'manifest.json'),
+    manifestPath,
     JSON.stringify({ generated_at: new Date().toISOString(), entries }, null, 2),
   );
   console.log(`\nWrote ${entries.length} mockups + manifest.json to ${OUT_DIR}`);

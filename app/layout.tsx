@@ -5,6 +5,8 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CustomCursor } from '@/components/CustomCursor';
 import { TimeOfDayTint } from '@/components/TimeOfDayTint';
+import { MikeChatWidget } from '@/components/mike/MikeChatWidget';
+import { MikeAvatarStyles } from '@/components/mike/MikeAvatar';
 
 const fraunces = Fraunces({
   variable: '--font-fraunces',
@@ -57,6 +59,12 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <SiteFooter />
         <CustomCursor />
+        <MikeAvatarStyles />
+        <MikeChatWidget
+          surface="sitiostudio_com"
+          variant="sitiostudio"
+          apiBase="https://app.sitiostudio.com"
+        />
       </body>
     </html>
   );

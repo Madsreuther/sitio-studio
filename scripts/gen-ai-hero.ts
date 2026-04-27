@@ -14,7 +14,17 @@ try {
   const raw = fsSync.readFileSync('.env.local', 'utf8');
   for (const line of raw.split('\n')) {
     const m = line.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/);
-    if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+    if (m && !process.env[m[1]]) {
+      let v = m[2];
+      // `vercel env pull` wraps values in double quotes. Strip a
+      // matched pair so downstream consumers get the bare value.
+      if (v.length >= 2 && v.startsWith('"') && v.endsWith('"')) {
+        v = v.slice(1, -1);
+      } else if (v.length >= 2 && v.startsWith("'") && v.endsWith("'")) {
+        v = v.slice(1, -1);
+      }
+      process.env[m[1]] = v;
+    }
   }
 } catch {
   /* fall through — env may already be set in the shell */

@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-04-25T09:07:06.018Z",
+  "generated_at": "2026-04-27T16:39:27.016Z",
   "entries": [
     {
       "variant": "hospitality",
       "file": "hospitality.png",
       "width": 1280,
       "height": 960,
-      "generated_at": "2026-04-25T09:06:57.173Z",
-      "seed": 963181754,
+      "generated_at": "2026-04-27T16:39:10.296Z",
+      "seed": 124907823,
       "prompt": "Minimalist hotel website mockup: hero photograph of a sun-bleached Mediterranean stone courtyard with arched windows at golden hour, warm editorial photography, simple top navigation bar, italic serif title, generous whitespace, cream and ochre palette. Web design portfolio screenshot. No fake text — visual blocks only."
     },
     {
@@ -15,8 +15,8 @@
       "file": "leisure.png",
       "width": 1280,
       "height": 960,
-      "generated_at": "2026-04-25T09:07:00.539Z",
-      "seed": 1088467807,
+      "generated_at": "2026-04-27T16:39:12.871Z",
+      "seed": 255283146,
       "prompt": "Editorial restaurant website mockup: hero photograph of a sunlit dining room with a terracotta tiled floor and a tall open window, warm midday light, italic serif headline overlay, soft cream and tan tones, very minimal top navigation, premium magazine feel. Web design portfolio screenshot."
     },
     {
@@ -24,8 +24,8 @@
       "file": "health.png",
       "width": 1280,
       "height": 960,
-      "generated_at": "2026-04-25T09:07:03.087Z",
-      "seed": 1321624743,
+      "generated_at": "2026-04-27T16:39:14.502Z",
+      "seed": 737599566,
       "prompt": "Calm clinic website mockup, hero photograph of soft beige interior with single chair and large window, daylight, italic serif headline, very white space, cream and sage tones, medical-but-warm. Web design portfolio screenshot."
     },
     {
@@ -33,9 +33,45 @@
       "file": "wine.png",
       "width": 1280,
       "height": 960,
-      "generated_at": "2026-04-25T09:07:06.017Z",
-      "seed": 2073192798,
+      "generated_at": "2026-04-27T16:39:17.465Z",
+      "seed": 1929810962,
       "prompt": "Boutique estate website mockup: hero photograph of rolling Mediterranean countryside with terraced stone walls and a single farmhouse at sunset, warm earth and cream palette, italic serif headline overlay, clean top navigation, premium estate aesthetic. Web design portfolio screenshot."
+    },
+    {
+      "variant": "yoga",
+      "file": "yoga.png",
+      "width": 1280,
+      "height": 960,
+      "generated_at": "2026-04-27T16:39:19.542Z",
+      "seed": 1781586690,
+      "prompt": "Minimal yoga studio website mockup: hero photograph of an empty pale wood-floor studio room with tall windows and warm morning light streaming across the floor, single folded cushion, neutral linen tones, italic serif headline overlay, very simple top navigation, calm editorial photography. Web design portfolio screenshot."
+    },
+    {
+      "variant": "coffee",
+      "file": "coffee.png",
+      "width": 1280,
+      "height": 960,
+      "generated_at": "2026-04-27T16:39:21.397Z",
+      "seed": 1188941989,
+      "prompt": "Editorial coffee roastery website mockup: hero photograph of a warmly lit industrial roastery interior with a copper drum roaster and stacked burlap sacks, soft afternoon light, warm earth and rust palette, italic serif headline overlay, minimal top navigation, premium magazine feel. Web design portfolio screenshot."
+    },
+    {
+      "variant": "architecture",
+      "file": "architecture.png",
+      "width": 1280,
+      "height": 960,
+      "generated_at": "2026-04-27T16:39:24.765Z",
+      "seed": 114983063,
+      "prompt": "Architecture studio website mockup: hero photograph of a clean wooden drafting table with rolled blueprints, a brass scale ruler, and a soft overhead lamp, neutral cool palette of pale stone and slate blue, daylight from the side, italic serif headline overlay, minimal top navigation, editorial restraint. Web design portfolio screenshot."
+    },
+    {
+      "variant": "bakery",
+      "file": "bakery.png",
+      "width": 1280,
+      "height": 960,
+      "generated_at": "2026-04-27T16:39:27.016Z",
+      "seed": 201373354,
+      "prompt": "Editorial bakery website mockup: hero photograph of a warm bakery interior with rustic country loaves on a worn wooden counter, soft window light, golden crust tones, cream and amber palette, italic serif headline overlay, minimal top navigation, premium artisan feel. Web design portfolio screenshot."
     }
   ]
 }

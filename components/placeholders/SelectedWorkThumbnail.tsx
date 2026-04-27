@@ -10,7 +10,16 @@ import Image from 'next/image';
 // hero headlines, not business names; the business type + location
 // lives underneath the card as a caption.
 
-export type WorkVariant = 'leisure' | 'health' | 'hospitality' | 'wine' | 'retail';
+export type WorkVariant =
+  | 'leisure'
+  | 'health'
+  | 'hospitality'
+  | 'wine'
+  | 'retail'
+  | 'yoga'
+  | 'coffee'
+  | 'architecture'
+  | 'bakery';
 
 type Palette = {
   canvas: string;       // page bg
@@ -68,6 +77,42 @@ const PALETTES: Record<WorkVariant, Palette> = {
     heroStart: '#C3A880',
     heroEnd: '#5D4530',
   },
+  yoga: {
+    canvas: '#F4EFE6',
+    surface: '#E8E0D2',
+    ink: '#1F1C18',
+    muted: '#7A715F',
+    accent: '#A89476',
+    heroStart: '#D8C8B0',
+    heroEnd: '#7A6B52',
+  },
+  coffee: {
+    canvas: '#EFE3D2',
+    surface: '#DCC7A8',
+    ink: '#2A1A0F',
+    muted: '#7A5638',
+    accent: '#9C5E2E',
+    heroStart: '#B97D44',
+    heroEnd: '#3D1E0E',
+  },
+  architecture: {
+    canvas: '#F2EEE6',
+    surface: '#E0DACC',
+    ink: '#1B1F26',
+    muted: '#5E6573',
+    accent: '#7A8597',
+    heroStart: '#C8CBD2',
+    heroEnd: '#3F4654',
+  },
+  bakery: {
+    canvas: '#F6E8CE',
+    surface: '#EAD2A7',
+    ink: '#2B1A0C',
+    muted: '#7A5A35',
+    accent: '#B07A3A',
+    heroStart: '#D8AA68',
+    heroEnd: '#5C341A',
+  },
 };
 
 const MOCK_HEADLINES: Record<WorkVariant, string> = {
@@ -76,6 +121,10 @@ const MOCK_HEADLINES: Record<WorkVariant, string> = {
   hospitality: 'An old house, kept generous.',
   wine: 'A vineyard, a family, a patient wait.',
   retail: 'Small things, chosen slowly.',
+  yoga: 'Breath, light, a quiet room.',
+  coffee: 'Roasted close to the harbour.',
+  architecture: 'Drawn carefully, built slowly.',
+  bakery: 'Warm bread, made before sunrise.',
 };
 
 export function SelectedWorkThumbnail({

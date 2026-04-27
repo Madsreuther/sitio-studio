@@ -75,4 +75,30 @@ export const WORK_PROMPTS: Record<string, { prompt: string; negative?: string }>
     prompt:
       'Boutique estate website mockup: hero photograph of rolling Mediterranean countryside with terraced stone walls and a single farmhouse at sunset, warm earth and cream palette, italic serif headline overlay, clean top navigation, premium estate aesthetic. Web design portfolio screenshot.',
   },
+  yoga: {
+    // Calm minimal studio space with morning sunlight raking across
+    // pale wood floor. No people, no postures (people-prompts have
+    // tripped FAL filters historically).
+    prompt:
+      'Minimal yoga studio website mockup: hero photograph of an empty pale wood-floor studio room with tall windows and warm morning light streaming across the floor, single folded cushion, neutral linen tones, italic serif headline overlay, very simple top navigation, calm editorial photography. Web design portfolio screenshot.',
+  },
+  coffee: {
+    // Warm industrial roastery interior. Concrete-object phrasing
+    // (drum roaster + burlap sack) matches the pattern that has
+    // historically passed FAL.
+    prompt:
+      'Editorial coffee roastery website mockup: hero photograph of a warmly lit industrial roastery interior with a copper drum roaster and stacked burlap sacks, soft afternoon light, warm earth and rust palette, italic serif headline overlay, minimal top navigation, premium magazine feel. Web design portfolio screenshot.',
+  },
+  architecture: {
+    // Drafting-table top-down composition. Avoids people and avoids
+    // any flagged construction terms.
+    prompt:
+      'Architecture studio website mockup: hero photograph of a clean wooden drafting table with rolled blueprints, a brass scale ruler, and a soft overhead lamp, neutral cool palette of pale stone and slate blue, daylight from the side, italic serif headline overlay, minimal top navigation, editorial restraint. Web design portfolio screenshot.',
+  },
+  bakery: {
+    // Warm bakery interior with bread on a wooden counter. No people,
+    // concrete-object only.
+    prompt:
+      'Editorial bakery website mockup: hero photograph of a warm bakery interior with rustic country loaves on a worn wooden counter, soft window light, golden crust tones, cream and amber palette, italic serif headline overlay, minimal top navigation, premium artisan feel. Web design portfolio screenshot.',
+  },
 } as const;

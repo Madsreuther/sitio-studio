@@ -11,38 +11,16 @@ import {
   InverseButton,
   Rule,
 } from '@/components/ui';
-import {
-  SelectedWorkThumbnail,
-  type WorkVariant,
-} from '@/components/placeholders/SelectedWorkThumbnail';
 import { FoundersIllustration } from '@/components/placeholders/FoundersIllustration';
 import { HeroBackground } from '@/components/HeroBackground';
 import { AnimatedHeadline } from '@/components/AnimatedHeadline';
 import { readHeroManifest, readWorkManifest } from '@/lib/ai/manifest';
+import { SelectedWorkCarousel } from '@/components/SelectedWorkCarousel';
+import { CASE_STUDIES } from '@/lib/case-studies';
 // HeroScene (Three.js paper-craft scene) and HeroAiWash (subtle multiply
 // overlay) are intentionally NOT imported here. They remain on disk for
 // future use; the brand hero is now driven by the AI-generated full-bleed
 // image via HeroBackground.
-
-// Small curated sample list. Images intentionally not wired to live previews
-// yet — placeholder gradients keep the page fast and predictable until real
-// photography lands.
-type Sample = {
-  kind: string;
-  region: string;
-  variant: WorkVariant;
-};
-
-// Non-clickable display cards — stock-style imagery showing aesthetic
-// across common business types we design for. Intentionally no business
-// names and no click-through; the label below each card is the only
-// context.
-const SAMPLES: Sample[] = [
-  { kind: 'Boutique hotel', region: 'Costa del Sol', variant: 'hospitality' },
-  { kind: 'Restaurant', region: 'Lisboa', variant: 'leisure' },
-  { kind: 'Dental clinic', region: 'Madrid', variant: 'health' },
-  { kind: 'Winery', region: 'Mendoza', variant: 'wine' },
-];
 
 const PILLARS = [
   {
@@ -169,7 +147,7 @@ export default function HomePage() {
       </section>
 
       {/* SELECTED WORK ────────────────────────────────────────────── */}
-      <section className="py-24 md:py-32">
+      <section id="selected-work" className="py-24 md:py-32 scroll-mt-24">
         <Container>
           <div className="flex items-end justify-between gap-8 mb-12">
             <Reveal>
@@ -180,23 +158,27 @@ export default function HomePage() {
             </Reveal>
             <Reveal delayMs={100}>
               <p className="hidden sm:block text-[13px] text-[var(--color-ink-muted)] max-w-[32ch] leading-relaxed">
-                Sample work · early launches. More case studies being written.
+                Eight launches across hospitality, health, wine, and craft. Tap a card to read the case.
               </p>
             </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-5 lg:gap-6">
-            {SAMPLES.map((s, i) => (
-              <Reveal key={`${s.kind}-${s.region}`} delayMs={i * 80}>
-                <SampleCard
-                  kind={s.kind}
-                  region={s.region}
-                  variant={s.variant}
-                  workManifest={workManifest}
-                />
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delayMs={160}>
+            <SelectedWorkCarousel
+              cards={CASE_STUDIES.map((c) => {
+                const ai = workManifest?.[c.variant];
+                return {
+                  slug: c.slug,
+                  kind: c.kind,
+                  region: c.region,
+                  variant: c.variant,
+                  aiSrc: ai ? `/ai-cache/work/${ai.file}` : undefined,
+                  aiW: ai?.width,
+                  aiH: ai?.height,
+                };
+              })}
+            />
+          </Reveal>
         </Container>
       </section>
 
@@ -269,40 +251,6 @@ export default function HomePage() {
 }
 
 // ─────────────────────────────────────────────────────────────────
-
-function SampleCard({
-  kind,
-  region,
-  variant,
-  workManifest,
-}: {
-  kind: string;
-  region: string;
-  variant: WorkVariant;
-  workManifest: ReturnType<typeof readWorkManifest>;
-}) {
-  const ai = workManifest?.[variant];
-  return (
-    <figure className="group block">
-      <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-[var(--color-cream-deep)] ring-1 ring-[var(--color-rule)]/70 transition-shadow duration-500 ease-out group-hover:ring-[var(--color-earth)]/40 group-hover:shadow-[0_18px_40px_-22px_rgba(26,24,20,0.35)]">
-        <SelectedWorkThumbnail
-          variant={variant}
-          aiSrc={ai ? `/ai-cache/work/${ai.file}` : undefined}
-          aiW={ai?.width}
-          aiH={ai?.height}
-        />
-      </div>
-      <figcaption className="mt-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <span className="font-[var(--font-serif)] italic text-[16px] lg:text-[15px] text-[var(--color-ink)]">
-          {kind}
-        </span>
-        <span className="uppercase tracking-[0.2em] text-[10.5px] text-[var(--color-ink-muted)]">
-          {region}
-        </span>
-      </figcaption>
-    </figure>
-  );
-}
 
 function FoundersPortrait() {
   return (
